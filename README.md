@@ -1,4 +1,29 @@
-<img align="left" src="https://user-images.githubusercontent.com/49886317/167401362-923cd69b-3beb-4e02-856e-d32872eaa5f4.png" height="128">
+# sith4
 
-# Sith v4
-_The brand new Web UI_
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your unit tests
+```
+npm run test:unit
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
