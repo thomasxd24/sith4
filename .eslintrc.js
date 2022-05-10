@@ -12,6 +12,7 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "linebreak-style": 0, // avoid line break issue within Windows environment
     quotes: ["error", "double"],
+    "max-len": ["error", { code: Infinity }],
   },
   overrides: [
     {
