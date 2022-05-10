@@ -1,5 +1,6 @@
 <template>
   <p>{{ t('message') }}</p>
+  <button @click="changeLocale">{{ locale }}</button>
 </template>
 
 <script lang="ts">
@@ -9,14 +10,17 @@ import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "HelloI18n",
   setup() {
-    const { t } = useI18n({
+    const { t, locale } = useI18n({
       inheritLocale: true,
       useScope: "global",
     });
 
-    // Something todo ..
-
-    return { t };
+    return { t, locale };
+  },
+  methods: {
+    changeLocale() {
+      this.locale = this.locale === "en" ? "fr" : "en";
+    },
   },
 });
 </script>
