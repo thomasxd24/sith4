@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "exodiusstudios.comment-anchors",
+    "leonardssh.vscord",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker-french",
+    "faisalhakim47.vue-inline-template",
+    "vue.volar",
+    "octref.vetur",
+    "aaron-bond.better-comments"
+  ]
+}
