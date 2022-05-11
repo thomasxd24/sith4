@@ -1,0 +1,37 @@
+.router-language-switcher {
+  display: flex;
+  flex-direction: column;
+
+  &-item {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    > a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-transform: uppercase;
+      text-decoration: none;
+      width: 200px;
+      padding: 10px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .2);
+      }
+
+      > .img {
+        margin-right: 10px;
+        width: 32px;
+        height: 32px;
+
+        background-position: center;
+        background-size: cover;
+
+        border: 1px solid black;
+        border-radius: 50%;
+      }
+    }
+  }
+}

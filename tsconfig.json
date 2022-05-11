@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
@@ -19,6 +20,10 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "*": [
+        "node_modules/*",
+        "types/*"
       ]
     },
     "lib": [
@@ -33,7 +38,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

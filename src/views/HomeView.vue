@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    Home sweat home
+    {{ $t("home.message") }}
   </div>
 </template>
 

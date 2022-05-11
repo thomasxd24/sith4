@@ -1,0 +1,11 @@
+{
+	"hello": "Hello!",
+	"about": {
+		"nav": "About",
+		"title": "This is an About page."
+	},
+	"home": {
+		"nav": "Home",
+		"message": "Hello, world!"
+	}
+}

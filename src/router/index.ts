@@ -1,50 +1,40 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-// import { h } from "vue";
-import i18n from "@/plugins/i18n";
+import { createWebHistory, RouteRecordRaw } from "vue-router";
+import { createLangRouter } from "vue-lang-router";
+
+import translations from "@/lang/translations";
+import localizedURLs from "@/lang/localized-urls";
+
 import HomeView from "@/views/HomeView.vue";
 import AboutView from "@/views/AboutView.vue";
+import { dateTimeFormats, getBrowserLocale, numberFormats } from "@/utils/i18n";
 
-const locale = i18n.global.locale.value;
-
-//! routes are fucked up, they don't render properly
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: `/${locale}`,
+    name: "home",
+    component: HomeView,
   },
   {
-    path: "/:lang",
-    name: "root",
-    //! it is related to this line (does nothing)
-    component: {
-      template: "template: '<router-view />'",
-    },
-    children: [
-      {
-        path: "home",
-        name: "home",
-        component: HomeView,
-      },
-      {
-        path: "about",
-        name: "about",
-        component: AboutView,
-      },
-    ],
+    path: "/about",
+    name: "about",
+    component: AboutView,
   },
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const langRouterOptions = {
+  defaultLanguage: getBrowserLocale({ countryCodeOnly: true }),
+  translations,
+  localizedURLs,
+  i18nOptions: {
+    dateTimeFormats,
+    numberFormats,
+  },
+};
+
+const routerOptions = {
   routes,
-});
+  history: createWebHistory(process.env.BASE_URL),
+};
 
-router.beforeEach((to, from, next) => {
-  const lang = to.params.lang as string;
-  if (!["en", "fr"].includes(lang)) return next("en");
-  if (i18n.global.locale.value !== lang) i18n.global.locale.value = lang;
-
-  return next();
-});
-
+const router = createLangRouter(langRouterOptions, routerOptions);
 export default router;

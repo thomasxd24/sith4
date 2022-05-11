@@ -3,7 +3,7 @@ export default (options: { countryCodeOnly: boolean } = { countryCodeOnly: false
     ? navigator.languages[0]
     : navigator.language;
 
-  if (!navigatorLocale) return "en";
+  if (!navigatorLocale) return process.env.VUE_APP_DEFAULT_LANGUAGE || "en";
 
   return options.countryCodeOnly
     ? navigatorLocale.trim().split(/-|_/)[0]
