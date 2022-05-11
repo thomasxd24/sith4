@@ -7,7 +7,12 @@ import HomeView from '@/views/HomeView.vue';
 import AboutView from '@/views/AboutView.vue';
 import { dateTimeFormats, getBrowserLocale, numberFormats } from '@/utils/i18n';
 
-// Vue routes setup
+/**
+ * --- Vue routes setup ---
+ * Set up translations for routes:
+ * >- add the route below
+ * >- add the name in the @/lang/en/urls.json file
+ */
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -21,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
-// i18n routes adapter (to translate routes to the matching locale)
+// i18n routes adapter (to modify routes to the matching locale equivalent)
 const langRouterOptions = {
   defaultLanguage: getBrowserLocale({ countryCodeOnly: true }),
   translations,
