@@ -7,8 +7,11 @@
       </a>
     </li>
   </language-switcher>
+  <br>
+
   <localized-link to="/">{{ $t('home.nav') }}</localized-link> |
   <localized-link to="/about">{{ $t('about.nav') }}</localized-link>
+  <br>
 
   <router-view />
 

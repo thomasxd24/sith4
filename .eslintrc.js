@@ -8,6 +8,10 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'import/extensions': ['error', {
+      vue: 'always',
+      css: 'never' || 'always',
+    }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'max-len': ['error', { code: Infinity }],

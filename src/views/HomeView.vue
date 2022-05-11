@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    {{ $t("home.message") }}
-  </div>
+  <v-btn>{{ $t("home.message") }}</v-btn>
 </template>
 
 <script lang="ts">

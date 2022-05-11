@@ -1,7 +1,14 @@
 import { createApp } from 'vue';
+import { i18n } from 'vue-lang-router';
+import { loadFonts } from '@/plugins/webfontloader';
 import App from '@/App.vue';
 import router from '@/router';
-import { i18n } from 'vue-lang-router';
+import vuetify from '@/plugins/vuetify';
 
-const app = createApp(App);
-app.use(router).use(i18n).mount('#app');
+loadFonts();
+
+createApp(App)
+  .use(router)
+  .use(i18n)
+  .use(vuetify)
+  .mount('#app');

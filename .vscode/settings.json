@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
+    "materialdesignicons",
     "scripthost",
-    "sith"
+    "sith",
+    "webfontloader"
   ],
   "[json]": {
       "editor.defaultFormatter": "vscode.json-language-features"

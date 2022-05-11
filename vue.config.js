@@ -19,5 +19,9 @@ module.exports = defineConfig({
       compositionOnly: false,
       fullInstall: true,
     },
+    vuetify: {
+      // TODO: define theme colors here
+      // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
+    },
   },
 });
