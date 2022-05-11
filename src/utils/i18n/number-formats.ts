@@ -1,9 +1,14 @@
-export default {
+import { IntlNumberFormats } from "vue-i18n";
+
+/**
+ * Default override for number formats of the application.
+ */
+const numberFormats: IntlNumberFormats = {
   en: {
     currency: {
       style: "currency",
       currency: "EUR",
-      currencyDisplay: "symbol",
+      currencyDisplay: "code",
     },
   },
   fr: {
@@ -14,3 +19,5 @@ export default {
     },
   },
 };
+
+export default numberFormats;

@@ -13,9 +13,11 @@
   <router-view />
 
   <footer>
-    <p>{{ $d(new Date(), 'short') }}</p>
-    <p>{{ $d(new Date(), 'long') }}</p>
-  </footer>
+    <!-- this one doesn't work (shouldn't be empty) -->
+    <p>{{ $d(new Date(), "short", "en-US") }}</p>
+    <!-- works somewhat properly -->
+    <p>{{ $n(1000, "currency") }}</p>
+</footer>
 </template>
 
 <script lang="ts">
@@ -25,7 +27,6 @@ export default defineComponent({
   name: "App",
   mounted() {
     /**
-     * ! do not work anymore
      * Watch for locale changes and set the document lang and direction.
      * ex: <html lang="en" dir="ltr">
      */
@@ -42,6 +43,10 @@ export default defineComponent({
     }, { immediate: true });
   },
   methods: {
+    /**
+     * Get the appropriate background image url for the given language.
+     * @param {String} lang the given language (2 letters code)
+     */
     getURL(lang: string) {
       switch (lang) {
         case "en": return "url('https://flagcdn.com/gb.svg')";
