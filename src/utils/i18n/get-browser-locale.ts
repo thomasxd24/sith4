@@ -8,11 +8,9 @@ export interface GetBrowserLocaleOptions {
  * @returns {String} the browser locale.
  */
 const getBrowserLocale = (options?: GetBrowserLocaleOptions): string => {
-  const navigatorLocale = navigator.languages !== undefined
-    ? navigator.languages[0]
-    : navigator.language;
+  const navigatorLocale = navigator.languages !== undefined ? navigator.languages[0] : navigator.language;
 
-  if (!navigatorLocale) return process.env.VUE_APP_DEFAULT_LANGUAGE || "en";
+  if (!navigatorLocale) return process.env.VUE_APP_DEFAULT_LANGUAGE || 'en';
 
   return options && options.countryCodeOnly
     ? navigatorLocale.trim().split(/-|_/)[0]

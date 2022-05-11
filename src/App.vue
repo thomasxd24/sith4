@@ -17,27 +17,27 @@
     <p>{{ $d(new Date(), "short", "en-US") }}</p>
     <!-- works somewhat properly -->
     <p>{{ $n(1000, "currency") }}</p>
-</footer>
+  </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   mounted() {
     /**
      * Watch for locale changes and set the document lang and direction.
      * ex: <html lang="en" dir="ltr">
      */
-    this.$watch("$i18n.locale", (newLocale: string, oldLocale: string) => {
+    this.$watch('$i18n.locale', (newLocale: string, oldLocale: string) => {
       if (newLocale === oldLocale) return;
       switch (newLocale) {
-        case "ar":
-          document.dir = "rtl";
+        case 'ar':
+          document.dir = 'rtl';
           break;
         default:
-          document.dir = "ltr";
+          document.dir = 'ltr';
           break;
       }
     }, { immediate: true });
@@ -49,7 +49,7 @@ export default defineComponent({
      */
     getURL(lang: string) {
       switch (lang) {
-        case "en": return "url('https://flagcdn.com/gb.svg')";
+        case 'en': return "url('https://flagcdn.com/gb.svg')";
         default: return `url('https://flagcdn.com/${lang}.svg')`;
       }
     },

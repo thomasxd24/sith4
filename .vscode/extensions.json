@@ -5,9 +5,8 @@
     "leonardssh.vscord",
     "dbaeumer.vscode-eslint",
     "streetsidesoftware.code-spell-checker-french",
-    "faisalhakim47.vue-inline-template",
     "vue.volar",
-    "octref.vetur",
-    "aaron-bond.better-comments"
+    "aaron-bond.better-comments",
+    "remimarsal.prettier-now"
   ]
 }

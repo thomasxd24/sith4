@@ -1,12 +1,15 @@
-import { i18n, IntlDateTimeFormats, IntlNumberFormats } from "vue-i18n";
-import { Router, RouterOptions } from "vue-router";
+import { i18n, IntlDateTimeFormats, IntlNumberFormats } from 'vue-i18n';
+import { Router, RouterOptions } from 'vue-router';
 
-declare module "vue-lang-router" {}
+declare module 'vue-lang-router' {}
+
+export type Translations = { [lang: string]: { name: string; load() } };
+export type LocalizedURLs = { [lang: string]: { [key: string]: unknown } };
 
 interface LanguageOptions {
   defaultLanguage: string;
-  translations: { [lang: string]: { name: string; load() } };
-  localizedURLs: { [lang: string]: { [key: string]: unknown } };
+  translations: Translations;
+  localizedURLs: LocalizedURLs;
   i18nOptions?: {
     dateTimeFormats?: IntlDateTimeFormats;
     numberFormats?: IntlNumberFormats;

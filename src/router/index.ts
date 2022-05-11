@@ -1,23 +1,22 @@
-import { createWebHistory, RouteRecordRaw } from "vue-router";
-import { createLangRouter } from "vue-lang-router";
+import { createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createLangRouter } from 'vue-lang-router';
 
-import translations from "@/lang/translations";
-import localizedURLs from "@/lang/localized-urls";
+import { localizedURLs, translations } from '@/lang/index';
 
-import HomeView from "@/views/HomeView.vue";
-import AboutView from "@/views/AboutView.vue";
-import { dateTimeFormats, getBrowserLocale, numberFormats } from "@/utils/i18n";
+import HomeView from '@/views/HomeView.vue';
+import AboutView from '@/views/AboutView.vue';
+import { dateTimeFormats, getBrowserLocale, numberFormats } from '@/utils/i18n';
 
 // Vue routes setup
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "home",
+    path: '/',
+    name: 'home',
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
+    path: '/about',
+    name: 'about',
     component: AboutView,
   },
 ];
