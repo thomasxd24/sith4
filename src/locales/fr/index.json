@@ -1,0 +1,7 @@
+{
+  "message": "bonjour i18n !!",
+  "pages": {
+    "home": "Accueil",
+    "about": "A propos"
+  }
+}
