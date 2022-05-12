@@ -4,7 +4,7 @@ import { Router, RouterOptions } from 'vue-router';
 declare module 'vue-lang-router' {}
 
 export type Translations = { [lang: string]: { name: string; load() } };
-export type LocalizedURLs = { [lang: string]: { [key: string]: unknown } };
+export type LocalizedURLs = { [lang: string]: { [key: string]: string } };
 
 interface LanguageOptions {
   defaultLanguage: string;

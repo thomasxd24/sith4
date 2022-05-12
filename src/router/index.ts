@@ -2,9 +2,6 @@ import { createWebHistory, RouteRecordRaw } from 'vue-router';
 import { createLangRouter } from 'vue-lang-router';
 
 import { localizedURLs, translations } from '@/lang/index';
-
-import HomeView from '@/views/HomeView.vue';
-import AboutView from '@/views/AboutView.vue';
 import { dateTimeFormats, getBrowserLocale, numberFormats } from '@/utils/i18n';
 
 /**
@@ -17,12 +14,24 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('@/views/HomeView.vue'),
   },
   {
-    path: '/about',
-    name: 'about',
-    component: AboutView,
+    path: '/sign-in',
+    name: 'sign-in',
+    component: () => import('@/views/SignInView.vue'),
+  },
+  {
+    path: '/sign-up',
+    name: 'sign-up',
+    component: () => import('@/views/SignUpView.vue'),
+    children: [
+      {
+        path: ':id',
+        name: 'sign-up-step',
+        component: () => import('@/views/SignUpView.vue'),
+      },
+    ],
   },
 ];
 
