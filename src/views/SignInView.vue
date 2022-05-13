@@ -1,3 +1,3 @@
 <template>
-  <div>Sign In</div>
+  <div>{{ $t("sign_in.message") }}</div>
 </template>

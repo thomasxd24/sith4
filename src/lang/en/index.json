@@ -1,11 +1,21 @@
 {
 	"lang_name": "English",
-	"about": {
-		"nav": "About",
-		"title": "This is an About page."
+	"lang_selector": "Select a language",
+	"theme_selector": "Select a theme",
+	"theme_colorblind": "Colorblind Mode",
+	"theme_dark": "Dark Mode",
+	"nav_bar": {
+		"btn_sign_in": "Sign in",
+		"btn_sign_up": "Sign up"
 	},
 	"home": {
 		"nav": "Home",
 		"message": "Hello, world!"
+	},
+	"sign_in": {
+		"message": "Sign In"
+	},
+	"sign_up": {
+		"message": "Sign Up"
 	}
 }
