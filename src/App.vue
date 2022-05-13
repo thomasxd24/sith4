@@ -1,10 +1,18 @@
 <template>
   <v-app :theme="theme">
-    <div style="max-width: 1080px; width: 100%; margin: 0 auto">
+    <main>
       <router-view />
-    </div>
+    </main>
   </v-app>
 </template>
+
+<style lang="scss">
+main {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto
+}
+</style>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
@@ -31,6 +39,11 @@ export default defineComponent({
 
       if (!this.isDark && this.isColorblind) this.toggleTheme('colorblindLight');
       else if (!this.isDark && !this.isColorblind) this.toggleTheme('light');
+    },
+  },
+  computed: {
+    isUserLogged() {
+      return true; // TODO: implement user authentification with the API @TheoDurr
     },
   },
   mounted() {

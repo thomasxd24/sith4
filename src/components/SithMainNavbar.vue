@@ -28,10 +28,22 @@
     </v-app-bar-title>
 
     <template v-slot:append>
+      <v-text-field
+        v-if="$root.isUserLogged"
+        prepend-icon="mdi-magnify"
+        :hide-details="true"
+        class="navbar-search"
+        v-model="search"
+        @keydown.enter="startsSearch"
+        @click:prepend="startsSearch"
+        label="Search"
+        density="compact"
+        variant="plain"
+      />
       <v-btn class="mr-1" @click="showThemePopup = true" icon="mdi-theme-light-dark"></v-btn>
       <v-btn class="mr-1" @click="showLanguagePopup = true" icon="mdi-translate"></v-btn>
-      <sith-btn-localized to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
-      <sith-btn-localized to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
+      <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
+      <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
     </template>
   </v-app-bar>
 </template>
@@ -50,6 +62,7 @@ export default defineComponent({
     return {
       showThemePopup: false,
       showLanguagePopup: false,
+      search: '',
     };
   },
   mounted() {
@@ -73,6 +86,11 @@ export default defineComponent({
     localizePath(path: string) {
       return localizePath(path, this.$i18n.locale, this.$route.path, this.$router);
     },
+    startsSearch() {
+      // TODO: implement search @TheoDurr
+      // eslint-disable-next-line no-alert
+      alert(`Search not implemented yet\n${this.search}`);
+    },
   },
 });
 </script>
@@ -93,6 +111,20 @@ export default defineComponent({
 
     > .v-card-subtitle {
       text-transform: uppercase;
+    }
+  }
+
+  &-search {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding-left: 10px;
+
+    > .v-input__control > .v-field {
+      min-width: 200px;
+
+      &--focused > .v-field__outline > .v-field-label {
+        color: transparent;
+      }
     }
   }
 }
