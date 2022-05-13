@@ -21,5 +21,6 @@
     "source.fixAll": true,
   },
   "prettier.singleQuote": true,
-  "prettier.requireConfig": true
+  "prettier.requireConfig": true,
+  "files.eol": "\n",
 }

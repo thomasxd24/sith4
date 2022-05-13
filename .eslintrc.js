@@ -16,7 +16,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'max-len': ['error', { code: Infinity }],
     'no-await-in-loop': 'off',
-    'linebreak-style': ['error', 'unix' || 'windows'],
   },
   overrides: [
     {
