@@ -4,6 +4,9 @@
 	"theme_selector": "Select a theme",
 	"theme_colorblind": "Colorblind Mode",
 	"theme_dark": "Dark Mode",
+	"errors": {
+		"login_required": "You must be logged in to access this page"
+	},
 	"nav_bar": {
 		"btn_sign_in": "Sign in",
 		"btn_sign_up": "Sign up",

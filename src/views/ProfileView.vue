@@ -15,6 +15,7 @@ export default defineComponent({
   mounted() {
     if (!this.$root.isUserLogged) {
       this.$router.push(localizePath('/sign-in', this.$i18n.locale, this.$route.path, this.$router));
+      this.$root.showSnackBar(this.$t('errors.login_required'), { color: 'error' });
     }
   },
 });

@@ -1,8 +1,17 @@
 <template>
   <v-app :theme="theme">
-    <main>
-      <router-view />
-    </main>
+    <router-view />
+
+    <v-snackbar
+      v-model="snackbar.show"
+      :timeout="snackbar.timeout"
+      :color="snackbar.color"
+      multi-line
+      bottom
+      right
+    >
+      {{ snackbar.message }}
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -15,6 +24,12 @@ export default defineComponent({
     return {
       isDark: false,
       isColorblind: false,
+      snackbar: {
+        show: false,
+        message: '',
+        color: 'error',
+        timeout: 4000,
+      },
 
       // TODO: implement user authentification @TheoDurr
       user: {
@@ -41,6 +56,16 @@ export default defineComponent({
 
       if (!this.isDark && this.isColorblind) this.toggleTheme('colorblindLight');
       else if (!this.isDark && !this.isColorblind) this.toggleTheme('light');
+    },
+    showSnackBar(message: string, options?: { stack?: Error, color?: string, timeout?: number }) {
+      this.snackbar.message = message;
+      if (options) {
+        this.snackbar.color = options.color || '#222';
+        this.snackbar.timeout = options.timeout || 4000;
+        if (options.stack) console.error(options.stack);
+      }
+
+      this.snackbar.show = true;
     },
   },
   computed: {
