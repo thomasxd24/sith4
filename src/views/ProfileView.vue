@@ -6,16 +6,23 @@
 import { defineComponent } from 'vue';
 import SithMainNavbar from '@/components/SithMainNavbar.vue';
 import localizePath from '@/utils/i18n/localizePath';
+import userStore from '@/store/user';
+import errorHandlerStore from '@/store/errorHandler';
 
 export default defineComponent({
   name: 'ProfileView',
   components: {
     SithMainNavbar,
   },
+  setup() {
+    const user = userStore();
+    const errorHandler = errorHandlerStore();
+    return { user, errorHandler };
+  },
   mounted() {
-    if (!this.$root.isUserLogged) {
+    if (!this.user.isUserLoggedIn()) {
       this.$router.push(localizePath('/sign-in', this.$i18n.locale, this.$route.path, this.$router));
-      this.$root.showSnackBar(this.$t('errors.login_required'), { color: 'error' });
+      this.errorHandler.show(this.$t('errors.login_required'), { color: 'error' });
     }
   },
 });

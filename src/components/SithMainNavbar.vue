@@ -31,7 +31,7 @@
 
     <template v-slot:append>
       <v-text-field
-        v-if="$root.isUserLogged"
+        v-if="user.isUserLoggedIn()"
         prepend-icon="mdi-magnify"
         :hide-details="true"
         class="navbar-search"
@@ -44,25 +44,25 @@
       />
       <v-btn density="comfortable" small class="mr-2" @click="showThemePopup = true" icon="mdi-theme-light-dark"></v-btn>
       <v-btn density="comfortable" small class="mr-2" @click="showLanguagePopup = true" icon="mdi-translate"></v-btn>
-      <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
-      <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
+      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
+      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
     </template>
   </v-app-bar>
   <v-app-bar
-    v-if="$root.isUserLogged !== false"
+    v-if="user.isUserLoggedIn()"
     dense
     shaped
     color="primary"
     class="navbar-user-menu"
   >
     <v-app-bar-title class="mr-4">
-      <localized-link :to="'/en/profile/' + $root.user.username" style="text-decoration: none; color: inherit" class="d-flex align-center">
+      <localized-link :to="'/en/profile/' + user.username" style="text-decoration: none; color: inherit" class="d-flex align-center">
         <v-col>
           <v-img src="@/assets/user_no_image.png" height="32" width="32" style="border-radius: 50%;" />
         </v-col>
         <v-col>
-          <v-row class="navbar-user-menu-title">{{ $root.user.firstName }}&nbsp;{{ $root.user.lastName }}</v-row>
-          <v-row class="navbar-user-menu-subtitle">{{ $root.user.nickname }}</v-row>
+          <v-row class="navbar-user-menu-title">{{ user.name }}&nbsp;{{ user.lastname }}</v-row>
+          <v-row class="navbar-user-menu-subtitle">{{ user.nickname }}</v-row>
         </v-col>
       </localized-link>
     </v-app-bar-title>
@@ -70,11 +70,11 @@
       <v-btn density="comfortable" small class="mr-2" @click="''" icon="mdi-tune"></v-btn>
 
       <v-badge
-        v-if="$root.user.notifications > 0"
+        v-if="user.getNotificationsCount() > 0"
         class="mr-2"
         color="error"
         overlap
-        :content="$root.user.notifications > 99 ? '!' : $root.user.notifications"
+        :content="user.getNotificationsCount() > 99 ? '!' : user.getNotificationsCount()"
       >
         <v-btn density="comfortable" small @click="''"  icon="mdi-bell-ring"></v-btn>
       </v-badge>
@@ -87,6 +87,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import userStore from '@/store/user';
 import SithLanguagePopup from '@/components/SithLanguagePopup.vue';
 import SithThemePopup from '@/components/SithThemePopup.vue';
 import SithBtnLocalized from '@/components/SithBtnLocalized.vue';
@@ -101,6 +102,10 @@ export default defineComponent({
       showLanguagePopup: false,
       search: '',
     };
+  },
+  setup() {
+    const user = userStore();
+    return { user };
   },
   mounted() {
     /**

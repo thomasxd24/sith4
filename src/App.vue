@@ -3,20 +3,21 @@
     <router-view />
 
     <v-snackbar
-      v-model="snackbar.show"
-      :timeout="snackbar.timeout"
-      :color="snackbar.color"
+      v-model="errorHandler.displayed"
+      :timeout="errorHandler.timeout"
+      :color="errorHandler.color"
       multi-line
       bottom
       right
     >
-      {{ snackbar.message }}
+      {{ errorHandler.message }}
     </v-snackbar>
   </v-app>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import errorHandlerStore from '@/store/errorHandler';
 
 export default defineComponent({
   name: 'App',
@@ -24,28 +25,15 @@ export default defineComponent({
     return {
       isDark: false,
       isColorblind: false,
-      snackbar: {
-        show: false,
-        message: '',
-        color: 'error',
-        timeout: 4000,
-      },
-
-      // TODO: implement user authentification @TheoDurr
-      user: {
-        username: 'juknum',
-        nickname: 'Tinople',
-        lastName: 'Constant',
-        firstName: 'Julien',
-        notifications: 0,
-      },
-
     };
   },
   setup() {
     const theme = ref('light');
+    const errorHandler = errorHandlerStore();
+
     return {
       theme,
+      errorHandler,
       toggleTheme: (str: string) => { theme.value = str; },
     };
   },
@@ -56,21 +44,6 @@ export default defineComponent({
 
       if (!this.isDark && this.isColorblind) this.toggleTheme('colorblindLight');
       else if (!this.isDark && !this.isColorblind) this.toggleTheme('light');
-    },
-    showSnackBar(message: string, options?: { stack?: Error, color?: string, timeout?: number }) {
-      this.snackbar.message = message;
-      if (options) {
-        this.snackbar.color = options.color || '#222';
-        this.snackbar.timeout = options.timeout || 4000;
-        if (options.stack) console.error(options.stack);
-      }
-
-      this.snackbar.show = true;
-    },
-  },
-  computed: {
-    isUserLogged() {
-      return !true; // TODO: implement user authentification with the API @TheoDurr
     },
   },
   mounted() {
@@ -92,5 +65,3 @@ export default defineComponent({
 });
 
 </script>
-
-<style lang="scss" src="./main.scss"/>
