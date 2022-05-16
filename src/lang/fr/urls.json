@@ -1,5 +1,7 @@
 {
 	"about": "a-propos",
 	"sign-in": "connexion",
-	"sign-up": "inscription"
+	"sign-up": "inscription",
+	"logout": "déconnexion",
+	"profile": "profil"
 }

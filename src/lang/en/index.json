@@ -6,7 +6,8 @@
 	"theme_dark": "Dark Mode",
 	"nav_bar": {
 		"btn_sign_in": "Sign in",
-		"btn_sign_up": "Sign up"
+		"btn_sign_up": "Sign up",
+		"btn_logout": "Logout"
 	},
 	"home": {
 		"nav": "Home",

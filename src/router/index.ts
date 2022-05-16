@@ -22,16 +22,26 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/SignInView.vue'),
   },
   {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: () => import('@/views/SignUpView.vue'),
+    path: '/logout',
+    name: 'logout',
+    component: () => import('@/views/LogoutView.vue'),
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/views/ProfileView.vue'),
     children: [
       {
         path: ':id',
-        name: 'sign-up-step',
-        component: () => import('@/views/SignUpView.vue'),
+        name: 'profile-of',
+        component: () => import('@/views/ProfileView.vue'),
       },
     ],
+  },
+  {
+    path: '/sign-up',
+    name: 'sign-up',
+    component: () => import('@/views/SignUpView.vue'),
   },
 ];
 

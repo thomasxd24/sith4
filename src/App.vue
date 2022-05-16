@@ -6,14 +6,6 @@
   </v-app>
 </template>
 
-<style lang="scss">
-main {
-  max-width: 1080px;
-  width: 100%;
-  margin: 0 auto
-}
-</style>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
@@ -23,6 +15,16 @@ export default defineComponent({
     return {
       isDark: false,
       isColorblind: false,
+
+      // TODO: implement user authentification @TheoDurr
+      user: {
+        username: 'juknum',
+        nickname: 'Tinople',
+        lastName: 'Constant',
+        firstName: 'Julien',
+        notifications: 0,
+      },
+
     };
   },
   setup() {
@@ -43,7 +45,7 @@ export default defineComponent({
   },
   computed: {
     isUserLogged() {
-      return true; // TODO: implement user authentification with the API @TheoDurr
+      return !true; // TODO: implement user authentification with the API @TheoDurr
     },
   },
   mounted() {

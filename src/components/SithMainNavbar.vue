@@ -4,27 +4,29 @@
 
   <v-app-bar
     dense
-    elevation="4"
-    rounded
     shaped
     color="primary"
-    class="navbar"
+    style="position: initial"
   >
     <template v-slot:prepend>
-      <v-img
-        aspect-ratio="1/1"
-        width="64"
-        height="64"
-        src="@/assets/ae_logo.png"
-        cover
-      ></v-img>
+      <localized-link to="/">
+        <v-img
+          aspect-ratio="1/1"
+          width="64"
+          height="64"
+          src="@/assets/ae_logo.png"
+          cover
+        ></v-img>
+      </localized-link>
     </template>
 
     <v-app-bar-title>
-      <v-card class="navbar-title" color="primary">
-        <v-card-title>Association des Étudiants</v-card-title>
-        <v-card-subtitle>de l'université de Belfort-Montbéliard</v-card-subtitle>
-      </v-card>
+      <localized-link to="/" style="text-decoration: none; color: inherit;">
+        <v-col>
+          <v-row color="primary" class="navbar-title">Association des Étudiants</v-row>
+          <v-row color="primary" class="navbar-subtitle">De l'Université de Technologie de Belfort-Montbéliard</v-row>
+        </v-col>
+      </localized-link>
     </v-app-bar-title>
 
     <template v-slot:append>
@@ -40,10 +42,45 @@
         density="compact"
         variant="plain"
       />
-      <v-btn class="mr-1" @click="showThemePopup = true" icon="mdi-theme-light-dark"></v-btn>
-      <v-btn class="mr-1" @click="showLanguagePopup = true" icon="mdi-translate"></v-btn>
+      <v-btn density="comfortable" small class="mr-2" @click="showThemePopup = true" icon="mdi-theme-light-dark"></v-btn>
+      <v-btn density="comfortable" small class="mr-2" @click="showLanguagePopup = true" icon="mdi-translate"></v-btn>
       <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
       <sith-btn-localized v-if="$root.isUserLogged === false" to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
+    </template>
+  </v-app-bar>
+  <v-app-bar
+    v-if="$root.isUserLogged !== false"
+    dense
+    shaped
+    color="primary"
+    class="navbar-user-menu"
+  >
+    <v-app-bar-title class="mr-4">
+      <localized-link :to="'/en/profile/' + $root.user.username" style="text-decoration: none; color: inherit" class="d-flex align-center">
+        <v-col>
+          <v-img src="@/assets/user_no_image.png" height="32" width="32" style="border-radius: 50%;" />
+        </v-col>
+        <v-col>
+          <v-row class="navbar-user-menu-title">{{ $root.user.firstName }}&nbsp;{{ $root.user.lastName }}</v-row>
+          <v-row class="navbar-user-menu-subtitle">{{ $root.user.nickname }}</v-row>
+        </v-col>
+      </localized-link>
+    </v-app-bar-title>
+    <template v-slot:append>
+      <v-btn density="comfortable" small class="mr-2" @click="''" icon="mdi-tune"></v-btn>
+
+      <v-badge
+        v-if="$root.user.notifications > 0"
+        class="mr-2"
+        color="error"
+        overlap
+        :content="$root.user.notifications > 99 ? '!' : $root.user.notifications"
+      >
+        <v-btn density="comfortable" small @click="''"  icon="mdi-bell-ring"></v-btn>
+      </v-badge>
+      <v-btn v-else density="comfortable" small @click="''" icon="mdi-bell"></v-btn>
+
+      <sith-btn-localized to="/logout" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
     </template>
   </v-app-bar>
 </template>
@@ -97,30 +134,46 @@ export default defineComponent({
 
 <style lang="scss">
 .navbar {
-  position: initial !important;
+  &-user-menu {
+    max-width: fit-content;
+    right: 0;
+    border-radius: 0 0 0 20px;
+
+    &-title {
+      font-weight: 500;
+      color: #eee;
+    }
+
+    &-subtitle {
+      font-size: 0.8rem;
+      color: #ddd;
+    }
+  }
 
   &-title {
-    >.v-card-title,
-    >.v-card-subtitle {
-      padding: 0;
-    }
+    text-decoration: none;
+    color: #fff;
+  }
 
-    > .v-card-title {
-      line-height: initial;
-    }
-
-    > .v-card-subtitle {
-      text-transform: uppercase;
-    }
+  &-subtitle {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #ddd;
+    font-size: .75rem;
   }
 
   &-search {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding-left: 10px;
+    margin: 0 10px;
+
+    > .v-input__prepend > .v-icon:hover {
+      cursor: pointer;
+    }
 
     > .v-input__control > .v-field {
-      min-width: 200px;
+      min-width: 400px;
 
       &--focused > .v-field__outline > .v-field-label {
         color: transparent;

@@ -2,5 +2,7 @@
 	"__comment": "This file is only used for Crowdin as a source file, you must first define routes in @/router/index.ts",
 	"about": "about",
 	"sign-in": "sign-in",
-	"sign-up": "sign-up"
+	"sign-up": "sign-up",
+	"logout": "logout",
+	"profile": "profile"
 }
