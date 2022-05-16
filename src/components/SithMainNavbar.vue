@@ -33,7 +33,7 @@
       <v-text-field
         v-if="user.isUserLoggedIn()"
         prepend-icon="mdi-magnify"
-        :hide-details="true"
+        hide-details
         class="navbar-search"
         v-model="search"
         @keydown.enter="startsSearch"
@@ -80,14 +80,14 @@
       </v-badge>
       <v-btn v-else density="comfortable" small @click="''" icon="mdi-bell"></v-btn>
 
-      <sith-btn-localized to="/logout" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
+      <sith-btn-localized to="/sign-out" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
     </template>
   </v-app-bar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import userStore from '@/store/user';
+import userStore from '@/stores/user';
 import SithLanguagePopup from '@/components/SithLanguagePopup.vue';
 import SithThemePopup from '@/components/SithThemePopup.vue';
 import SithBtnLocalized from '@/components/SithBtnLocalized.vue';

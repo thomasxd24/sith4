@@ -19,12 +19,17 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/sign-in',
     name: 'sign-in',
-    component: () => import('@/views/SignInView.vue'),
+    component: () => import('@/views/LoginPage.vue'),
   },
   {
-    path: '/logout',
-    name: 'logout',
-    component: () => import('@/views/LogoutView.vue'),
+    path: '/sign-up',
+    name: 'sign-up',
+    component: () => import('@/views/LoginPage.vue'),
+  },
+  {
+    path: '/sign-out',
+    name: 'sign-out',
+    component: () => import('@/views/LoginPage.vue'),
   },
   {
     path: '/profile',
@@ -37,11 +42,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/ProfileView.vue'),
       },
     ],
-  },
-  {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: () => import('@/views/SignUpView.vue'),
   },
 ];
 

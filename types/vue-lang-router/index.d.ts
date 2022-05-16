@@ -1,5 +1,5 @@
-import { i18n, IntlDateTimeFormats, IntlNumberFormats } from 'vue-i18n';
-import { Router, RouterOptions } from 'vue-router';
+import type { IntlDateTimeFormats, IntlNumberFormats } from 'vue-i18n';
+import type { Router, RouterOptions } from 'vue-router';
 
 declare module 'vue-lang-router' {}
 
@@ -16,5 +16,5 @@ interface LanguageOptions {
   };
 }
 
-export { i18n };
+export { i18n } from 'vue-i18n';
 export function createLangRouter(languageOptions: LanguageOptions, routerOptions: RouterOptions): Router;

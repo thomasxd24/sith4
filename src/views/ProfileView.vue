@@ -6,8 +6,8 @@
 import { defineComponent } from 'vue';
 import SithMainNavbar from '@/components/SithMainNavbar.vue';
 import localizePath from '@/utils/i18n/localizePath';
-import userStore from '@/store/user';
-import errorHandlerStore from '@/store/errorHandler';
+import userStore from '@/stores/user';
+import errorHandlerStore from '@/stores/errorHandler';
 
 export default defineComponent({
   name: 'ProfileView',
@@ -22,7 +22,7 @@ export default defineComponent({
   mounted() {
     if (!this.user.isUserLoggedIn()) {
       this.$router.push(localizePath('/sign-in', this.$i18n.locale, this.$route.path, this.$router));
-      this.errorHandler.show(this.$t('errors.login_required'), { color: 'error' });
+      this.errorHandler.show(this.$t('errors.login.required'), { color: 'error' });
     }
   },
 });

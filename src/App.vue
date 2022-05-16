@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import errorHandlerStore from '@/store/errorHandler';
+import errorHandlerStore from '@/stores/errorHandler';
 
 export default defineComponent({
   name: 'App',

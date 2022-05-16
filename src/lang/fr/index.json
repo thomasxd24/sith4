@@ -4,22 +4,13 @@
 	"theme_selector": "Sélectionnez un thème",
 	"theme_colorblind": "Mode Daltonien",
 	"theme_dark": "Mode Sombre",
-	"errors": {
-		"login_required": "Vous devez être connecté pour accéder à cette page."
-	},
 	"nav_bar": {
 		"btn_sign_in": "S'identifier",
 		"btn_sign_up": "S'inscrire",
 		"btn_logout": "Déconnexion"
 	},
-	"home": {
-		"nav": "Accueil",
-		"message": "Bonjour, monde!"
-	},
-	"sign_in": {
-		"message": "S'identifier"
-	},
-	"sign_up": {
-		"message": "S'inscrire"
+	"buttons": {
+		"go_back": "Retour",
+		"submit": "Envoyer"
 	}
 }

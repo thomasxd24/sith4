@@ -2,6 +2,6 @@
 	"about": "a-propos",
 	"sign-in": "connexion",
 	"sign-up": "inscription",
-	"logout": "déconnexion",
+	"sign-out": "déconnexion",
 	"profile": "profil"
 }

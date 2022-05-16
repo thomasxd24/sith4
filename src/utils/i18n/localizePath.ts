@@ -47,7 +47,7 @@ function translatePath(path: string, langTo: string, langFrom: string, matchedPa
 export default function localizePath(fullPath: string, lang: string, routePath: string, router: Router): string {
   // if desired language does not exist OR is not defined, use current one
   // eslint-disable-next-line no-param-reassign
-  if (!lang || !localizedURLs[lang]) lang = process.env.VUE_APP_I18N_FALLBACK_LANGUAGE;
+  if (!lang || !localizedURLs[lang]) lang = process.env.VUE_APP_I18N_FALLBACK_LANGUAGE || 'en';
 
   // split query & base path
   let path = fullPath;
