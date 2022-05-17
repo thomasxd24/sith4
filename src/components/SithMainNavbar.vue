@@ -80,7 +80,7 @@
       </v-badge>
       <v-btn v-else density="comfortable" small @click="''" icon="mdi-bell"></v-btn>
 
-      <sith-btn-localized to="/sign-out" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
+      <sith-btn-localized to="/" @click="user.logout()" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
     </template>
   </v-app-bar>
 </template>

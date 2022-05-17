@@ -27,11 +27,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/LoginPage.vue'),
   },
   {
-    path: '/sign-out',
-    name: 'sign-out',
-    component: () => import('@/views/LoginPage.vue'),
-  },
-  {
     path: '/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView.vue'),

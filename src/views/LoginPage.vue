@@ -57,7 +57,7 @@ import { defineComponent } from 'vue';
 import documentStore from '@/stores/document';
 
 interface Data {
-  type: 'sign-in' | 'sign-up' | 'sign-out';
+  type: 'sign-in' | 'sign-up';
   form: { login: string; password: string };
   rules: {
     login: Array<(input: string) => string | true>;
