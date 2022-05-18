@@ -12,22 +12,36 @@
         v-model="form.login"
         :rules="rules.login"
         label="Email"
-        hide-details
         prepend-icon="mdi-account-circle"
       ></v-text-field>
       <v-text-field
         v-model="form.password"
         :rules="rules.password"
         label="Password"
-        hide-details
         :prepend-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         :type="showPassword ? 'text' : 'password'"
         @click:prepend="showPassword = !showPassword"
       ></v-text-field>
+      <v-text-field
+        v-if="type === 'sign-up'"
+        v-model="form.confirmPassword"
+        :rules="rules.confirmPassword"
+        label="Password confirmation"
+        :prepend-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="showConfirmPassword ? 'text' : 'password'"
+        @click:prepend="showConfirmPassword = !showConfirmPassword"
+      ></v-text-field>
     </v-form>
   </v-card-text>
+  <v-card-text
+    v-if="type === 'sign-in'"
+  >
+    <v-row class="justify-center mt-2 mb-2">
+      <localized-link to="/reset-password">Forgot Password</localized-link>
+    </v-row>
+  </v-card-text>
   <v-card-actions class="justify-center">
-    <v-btn class="bg-tertiary" @click="''">{{ $t('buttons.go_back') }}</v-btn>
+    <v-btn class="bg-tertiary" @click="$router.go(-1)">{{ $t('buttons.go_back') }}</v-btn>
     <v-btn class="bg-secondary" @click="''">{{ $t('buttons.submit') }}</v-btn>
   </v-card-actions>
 </v-card>
@@ -47,6 +61,10 @@
   }
 }
 
+.v-input__details {
+  margin-bottom: 2px;
+}
+
 .v-text-field {
   margin: 10px 0;
 }
@@ -54,16 +72,25 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import localizePath from '@/utils/i18n/localizePath';
 import documentStore from '@/stores/document';
+import userStore from '@/stores/user';
+import errorHandlerStore from '@/stores/errorHandler';
 
 interface Data {
   type: 'sign-in' | 'sign-up';
-  form: { login: string; password: string };
+  form: {
+    login: string;
+    password: string;
+    confirmPassword: string;
+  };
   rules: {
     login: Array<(input: string) => string | true>;
     password: Array<(input: string) => string | true>;
+    confirmPassword: Array<(input: string) => string | true>;
   },
   showPassword: boolean;
+  showConfirmPassword: boolean;
 }
 
 export default defineComponent({
@@ -74,6 +101,7 @@ export default defineComponent({
       form: {
         login: '',
         password: '',
+        confirmPassword: '',
       },
       rules: {
         login: [
@@ -84,15 +112,22 @@ export default defineComponent({
           (input: string) => !!input || 'The password is required',
           (input: string) => input.length >= 6 || 'The password must be at least 6 characters',
         ],
+        confirmPassword: [
+          (input: string) => !!input || 'The password is required',
+          (input: string) => this.checkPasswords(input) || 'The passwords do not match',
+        ],
       },
       showPassword: false,
+      showConfirmPassword: false,
     };
 
     return data;
   },
   setup() {
     const doc = documentStore();
-    return { doc };
+    const user = userStore();
+    const errorHandler = errorHandlerStore();
+    return { doc, user, errorHandler };
   },
   computed: {
     validForm() {
@@ -100,8 +135,18 @@ export default defineComponent({
     },
   },
   mounted() {
+    if (this.user.isUserLoggedIn()) {
+      this.$router.push(localizePath(`/profile/${this.user.username.toLowerCase()}`, this.$i18n.locale, this.$route.path, this.$router));
+      this.errorHandler.show('You are already logged in', { color: 'error' });
+    }
+
     this.type = this.$router.currentRoute.value.name as Data['type'];
     this.doc.setPageTitle(this.$t(`login_page.titles.${this.type}`));
+  },
+  methods: {
+    checkPasswords(input: string) {
+      return this.form.password === input;
+    },
   },
 });
 </script>

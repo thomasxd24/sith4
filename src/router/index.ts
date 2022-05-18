@@ -58,4 +58,10 @@ const routerOptions = {
 };
 
 const router = createLangRouter(langRouterOptions, routerOptions);
+
+router.beforeEach((to, from, next) => {
+  if (to.fullPath.endsWith('/')) next(to.fullPath.slice(0, -1));
+  else next();
+});
+
 export default router;

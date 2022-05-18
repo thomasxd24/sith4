@@ -9,8 +9,9 @@
         <v-btn
           v-for="link in links"
           :key="link.langIndex"
-          :class="link.activeClass"
+          :class="link.activeClass ? 'bg-secondary' : '' + ' mb-2 bg-hover-secondary'"
           :href="link.url"
+          :disabled="link.activeClass ? true : false"
           flat
           tile
           block
@@ -22,6 +23,16 @@
     </v-card>
   </v-dialog>
 </template>
+
+<style lang="scss">
+.active::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #000;
+}
+</style>
 
 <script lang="ts">
 import { defineComponent } from 'vue';

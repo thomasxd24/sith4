@@ -10,6 +10,13 @@ interface User {
   token: string | null;
 }
 
+interface Notification {
+  timestamp: number;
+  location?: string;
+  read: boolean;
+  name: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultUser: User = {
   id: null,
@@ -21,6 +28,7 @@ const defaultUser: User = {
   token: '',
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultUserDev: User = {
   id: 0,
   name: 'Julien',
@@ -37,6 +45,27 @@ export default defineStore('user', {
   actions: {
     getNotificationsCount(): number {
       return 0; // TODO: use API here
+    },
+    getNotifications(): Array<Notification> {
+      return [
+        {
+          read: false,
+          timestamp: new Date().getTime(),
+          location: 'Foyer',
+          name: 'Vous avez achetez 1x Soft',
+        },
+        {
+          read: false,
+          timestamp: new Date().getTime(),
+          location: 'MDE',
+          name: 'Vous avez achetez 1x Lustucru - Pastabox Formule',
+        },
+        {
+          read: true,
+          timestamp: new Date().getTime(),
+          name: 'Vous avez achetez rechargez votre compte de 10€',
+        },
+      ];
     },
     isUserLoggedIn(): boolean {
       return !!this.token;

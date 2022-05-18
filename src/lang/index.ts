@@ -37,7 +37,6 @@ async function loadLocales(lang: string) {
     else res[module] = { ...moduleDataFallback, ...moduleData }; // other modules are made as children (access locales via module name)
   }
 
-  console.log(res);
   return res;
 }
 

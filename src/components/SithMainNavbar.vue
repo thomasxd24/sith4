@@ -1,6 +1,7 @@
 <template>
   <sith-language-popup v-model="showLanguagePopup" />
   <sith-theme-popup v-model="showThemePopup" />
+  <sith-notification-popup v-if="user.isUserLoggedIn()" v-model="showNotificationPopup"></sith-notification-popup>
 
   <v-app-bar
     dense
@@ -78,7 +79,7 @@
       >
         <v-btn density="comfortable" small @click="''"  icon="mdi-bell-ring"></v-btn>
       </v-badge>
-      <v-btn v-else density="comfortable" small @click="''" icon="mdi-bell"></v-btn>
+      <v-btn v-else density="comfortable" small @click="showNotificationPopup = true"  icon="mdi-bell"></v-btn>
 
       <sith-btn-localized to="/" @click="user.logout()" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
     </template>
@@ -88,18 +89,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import userStore from '@/stores/user';
-import SithLanguagePopup from '@/components/SithLanguagePopup.vue';
-import SithThemePopup from '@/components/SithThemePopup.vue';
+import SithLanguagePopup from '@/components/popups/SithLanguagePopup.vue';
+import SithThemePopup from '@/components/popups/SithThemePopup.vue';
 import SithBtnLocalized from '@/components/SithBtnLocalized.vue';
 import localizePath from '@/utils/i18n/localizePath';
+import SithNotificationPopup from './popups/SithNotificationPopup.vue';
 
 export default defineComponent({
   name: 'sith-main-navbar',
-  components: { SithThemePopup, SithLanguagePopup, SithBtnLocalized },
+  components: {
+    SithThemePopup, SithLanguagePopup, SithBtnLocalized, SithNotificationPopup,
+  },
   data() {
     return {
       showThemePopup: false,
       showLanguagePopup: false,
+      showNotificationPopup: false,
       search: '',
     };
   },

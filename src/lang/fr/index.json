@@ -4,6 +4,7 @@
 	"theme_selector": "Sélectionnez un thème",
 	"theme_colorblind": "Mode Daltonien",
 	"theme_dark": "Mode Sombre",
+	"notifications": "Notifications",
 	"nav_bar": {
 		"btn_sign_in": "S'identifier",
 		"btn_sign_up": "S'inscrire",
@@ -11,6 +12,8 @@
 	},
 	"buttons": {
 		"go_back": "Retour",
-		"submit": "Envoyer"
+		"submit": "Envoyer",
+		"see_all": "Voir tout",
+		"mark_as_read": "Marquer comme lu"
 	}
 }
