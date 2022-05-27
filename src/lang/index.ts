@@ -1,5 +1,6 @@
 import type { Translations, LocalizedURLs } from 'vue-lang-router';
 
+const modules = ['index', 'login_page', 'errors']; // all "modules" in @/lang/<lang>/<module>.json
 const langs = process.env.VUE_APP_I18N_SUPPORTED_LOCALE?.split(',') || ['en'];
 const localizedURLs: LocalizedURLs = {};
 const translations: Translations = {};
@@ -24,7 +25,6 @@ async function loadJSON(path: string): Promise<{ default: object }> {
 }
 
 async function loadLocales(lang: string) {
-  const modules = ['index', 'login_page', 'errors']; // all "modules" in @/lang/<lang>/<module>.json
   const res: Locales = {};
 
   for (let i = 0; i < modules.length; i += 1) {
