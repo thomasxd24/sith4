@@ -5,6 +5,7 @@
     "pinia",
     "scripthost",
     "sith",
+    "vuejs",
     "webfontloader"
   ],
   "[json]": {

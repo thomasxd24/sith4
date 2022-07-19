@@ -4,6 +4,10 @@ import { createLangRouter } from 'vue-lang-router';
 import { localizedURLs, translations } from '@/lang/index';
 import { dateTimeFormats, getBrowserLocale, numberFormats } from '@/utils/i18n';
 
+import connexionRoutes from '@/router/routes/connexion';
+import userRoutes from '@/router/routes/user';
+import errorRoutes from '@/router/routes/errors';
+
 /**
  * --- Vue routes setup ---
  * Set up translations for routes:
@@ -14,30 +18,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/HomeView.vue'),
+    component: () => import('@/views/Home.vue'),
   },
-  {
-    path: '/sign-in',
-    name: 'sign-in',
-    component: () => import('@/views/LoginPage.vue'),
-  },
-  {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: () => import('@/views/LoginPage.vue'),
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('@/views/ProfileView.vue'),
-    children: [
-      {
-        path: ':id',
-        name: 'profile-of',
-        component: () => import('@/views/ProfileView.vue'),
-      },
-    ],
-  },
+  ...connexionRoutes,
+  ...userRoutes,
+  ...errorRoutes,
 ];
 
 // i18n routes adapter (to modify routes to the matching locale equivalent)
@@ -60,6 +45,7 @@ const routerOptions = {
 const router = createLangRouter(langRouterOptions, routerOptions);
 
 router.beforeEach((to, from, next) => {
+  if (to.path === '/') next(); // avoid infinite loop
   if (to.fullPath.endsWith('/')) next(to.fullPath.slice(0, -1));
   else next();
 });

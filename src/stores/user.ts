@@ -40,13 +40,14 @@ const defaultUserDev: User = {
 };
 
 export default defineStore('user', {
-  // state: () => defaultUser,
-  state: () => defaultUserDev,
+  state: () => defaultUser,
+  // state: () => defaultUserDev,
   actions: {
     getNotificationsCount(): number {
       return 0; // TODO: use API here
     },
     getNotifications(): Array<Notification> {
+      // TODO: use API here
       return [
         {
           read: false,

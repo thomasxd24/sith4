@@ -3,21 +3,10 @@
   <sith-theme-popup v-model="showThemePopup" />
   <sith-notification-popup v-if="user.isUserLoggedIn()" v-model="showNotificationPopup"></sith-notification-popup>
 
-  <v-app-bar
-    dense
-    shaped
-    color="primary"
-    style="position: initial"
-  >
+  <v-app-bar dense shaped color="primary" style="position: initial" class="navbar">
     <template v-slot:prepend>
       <localized-link to="/">
-        <v-img
-          aspect-ratio="1/1"
-          width="64"
-          height="64"
-          src="@/assets/ae_logo.png"
-          cover
-        ></v-img>
+        <v-img aspect-ratio="1/1" width="64" height="64" src="@/assets/ae_logo.png" cover></v-img>
       </localized-link>
     </template>
 
@@ -29,35 +18,23 @@
         </v-col>
       </localized-link>
     </v-app-bar-title>
-
     <template v-slot:append>
-      <v-text-field
-        v-if="user.isUserLoggedIn()"
-        prepend-icon="mdi-magnify"
-        hide-details
-        class="navbar-search"
-        v-model="search"
-        @keydown.enter="startsSearch"
-        @click:prepend="startsSearch"
-        label="Search"
-        density="compact"
-        variant="plain"
-      />
-      <v-btn density="comfortable" small class="mr-2" @click="showThemePopup = true" icon="mdi-theme-light-dark"></v-btn>
+      <v-text-field v-if="user.isUserLoggedIn()" prepend-icon="mdi-magnify" hide-details class="navbar-search"
+        v-model="search" @keydown.enter="startsSearch" @click:prepend="startsSearch" label="Search" density="compact"
+        variant="plain" />
+      <v-btn density="comfortable" small class="mr-2" @click="showThemePopup = true" icon="mdi-theme-light-dark">
+      </v-btn>
       <v-btn density="comfortable" small class="mr-2" @click="showLanguagePopup = true" icon="mdi-translate"></v-btn>
-      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-in" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
-      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-up" flat class="rounded bg-secondary mr-1">{{ $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
+      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-in" flat class="rounded bg-secondary mr-1">{{
+        $t("nav_bar.btn_sign_in") }}</sith-btn-localized>
+      <sith-btn-localized v-if="!user.isUserLoggedIn()" to="/sign-up" flat class="rounded bg-secondary mr-1">{{
+        $t("nav_bar.btn_sign_up") }}</sith-btn-localized>
     </template>
   </v-app-bar>
-  <v-app-bar
-    v-if="user.isUserLoggedIn()"
-    dense
-    shaped
-    color="primary"
-    class="navbar-user-menu"
-  >
+  <v-app-bar v-if="user.isUserLoggedIn()" dense shaped color="primary" class="navbar-user-menu">
     <v-app-bar-title class="mr-4">
-      <localized-link :to="'/en/profile/' + user.username" style="text-decoration: none; color: inherit" class="d-flex align-center">
+      <localized-link :to="'/en/profile/' + user.username" style="text-decoration: none; color: inherit"
+        class="d-flex align-center">
         <v-col>
           <v-img src="@/assets/user_no_image.png" height="32" width="32" style="border-radius: 50%;" />
         </v-col>
@@ -70,18 +47,14 @@
     <template v-slot:append>
       <v-btn density="comfortable" small class="mr-2" @click="''" icon="mdi-tune"></v-btn>
 
-      <v-badge
-        v-if="user.getNotificationsCount() > 0"
-        class="mr-2"
-        color="error"
-        overlap
-        :content="user.getNotificationsCount() > 99 ? '!' : user.getNotificationsCount()"
-      >
-        <v-btn density="comfortable" small @click="''"  icon="mdi-bell-ring"></v-btn>
+      <v-badge v-if="user.getNotificationsCount() > 0" class="mr-2" color="error" overlap
+        :content="user.getNotificationsCount() > 99 ? '!' : user.getNotificationsCount()">
+        <v-btn density="comfortable" small @click="''" icon="mdi-bell-ring"></v-btn>
       </v-badge>
-      <v-btn v-else density="comfortable" small @click="showNotificationPopup = true"  icon="mdi-bell"></v-btn>
+      <v-btn v-else density="comfortable" small @click="showNotificationPopup = true" icon="mdi-bell"></v-btn>
 
-      <sith-btn-localized to="/" @click="user.logout()" flat class="rounded bg-tertiary ml-5 mr-1">{{ $t("nav_bar.btn_logout") }}</sith-btn-localized>
+      <sith-btn-localized to="/" @click="user.logout()" flat class="rounded bg-tertiary ml-5 mr-1">{{
+        $t("nav_bar.btn_logout") }}</sith-btn-localized>
     </template>
   </v-app-bar>
 </template>
@@ -194,5 +167,23 @@ export default defineComponent({
 
 .v-toolbar__append {
   align-items: center;
+  -webkit-margin-start: unset;
+  margin-inline-start: unset;
+}
+
+@media (max-width: 840px) {
+  .v-toolbar__content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto !important;
+    padding: 0;
+  }
+
+  .v-toolbar__append {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
 }
 </style>

@@ -1,5 +1,17 @@
 {
     "login": {
         "required": "Vous devez être connecté pour accéder à cette page."
+    },
+    "page": {
+        "not_found": {
+            "title": "Page introuvable",
+            "description": "La page que vous cherchez n'existe pas."
+        },
+        "maintenance": {
+            "title": "Notre site reçoit une petite mise au point et un peu d'amour.",
+            "description_1": "Nous nous excusons pour la gêne occasionnée et nous vous invitons à revenir plus tard.",
+            "description_2": "Vous pouvez toujours nous contacter à l'adresse {email}.",
+            "description_3": "Le site sera de retour d'ici peu."
+        }
     }
 }
