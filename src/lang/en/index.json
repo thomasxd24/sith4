@@ -1,0 +1,20 @@
+{
+	"lang_name": "English",
+	"lang_selector": "Select a language",
+	"theme_selector": "Select a theme",
+	"theme_colorblind": "Colorblind Mode",
+	"theme_dark": "Dark Mode",
+	"notifications": "Notifications",
+	"team_name": "The AE Dev Team",
+	"nav_bar": {
+		"btn_sign_in": "Sign in",
+		"btn_sign_up": "Sign up",
+		"btn_logout": "Logout"
+	},
+	"buttons": {
+		"go_back": "Go Back",
+		"submit": "Submit",
+		"see_all": "See All",
+		"mark_as_read": "Mark as read"
+	}
+}

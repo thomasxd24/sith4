@@ -1,0 +1,20 @@
+{
+	"lang_name": "Français",
+	"lang_selector": "Sélectionnez une langue",
+	"theme_selector": "Sélectionnez un thème",
+	"theme_colorblind": "Mode Daltonien",
+	"theme_dark": "Mode Sombre",
+	"notifications": "Notifications",
+	"team_name": "L'équipe AE dev",
+	"nav_bar": {
+		"btn_sign_in": "S'identifier",
+		"btn_sign_up": "S'inscrire",
+		"btn_logout": "Déconnexion"
+	},
+	"buttons": {
+		"go_back": "Retour",
+		"submit": "Envoyer",
+		"see_all": "Voir tout",
+		"mark_as_read": "Marquer comme lu"
+	}
+}

@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "VueJS (Chrome)",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceRoot}/src",
+            "breakOnLoad": true,
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        },
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "VueJS (Edge)",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceRoot}/src",
+            "breakOnLoad": true,
+            "sourceMapPathOverrides": {
+                "webpack:///src/*": "${webRoot}/*"
+            }
+        },
+        {
+            "type": "firefox",
+            "request": "launch",
+            "name": "VueJS (Firefox)",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}/src",
+            "pathMappings": [{
+                "url": "webpack:///src/",
+                "path": "${webRoot}/"
+            }]
+        }
+    ]
+}
