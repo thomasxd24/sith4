@@ -1,5 +1,7 @@
 <template>
-  <v-app :theme="theme">
+  <v-app :theme="theme" style="background-color: #ecf2f8">
+    <navbar-normal />
+
     <router-view />
 
     <v-snackbar
@@ -16,51 +18,70 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, provide } from 'vue';
+import {
+  ThemeNames, GetTheme, SetTheme,
+} from '@/types/theme';
 import errorHandlerStore from '@/stores/errorHandler';
+import NavbarNormal from '@/components/navbar/NavbarNormal.vue';
 
 export default defineComponent({
   name: 'App',
-  data() {
-    return {
-      isDark: false,
-      isColorblind: false,
-    };
-  },
+  components: { NavbarNormal },
   setup() {
-    const theme = ref('light');
     const errorHandler = errorHandlerStore();
+
+    //#region THEME HANDLER
+    const theme = ref('light');
+
+    /**
+     * Set theme within the div with id="app"
+     * @param {ThemeNames} str the theme to set
+     */
+    const toggleTheme = (str: ThemeNames): void => { theme.value = str; };
+
+    /** @returns {Boolean} If Dark theme is enabled */
+    const dark: GetTheme = (): boolean => (localStorage.getItem('AE_UTBM_THEME_DARK') === 'true' ? true : false || false);
+
+    /** @returns {Boolean} If Colorblind theme is enabled */
+    const colorblind: GetTheme = (): boolean => (localStorage.getItem('AE_UTBM_THEME_COLORBLIND') === 'true' ? true : false || false);
+
+    /**
+     * Switch the theme accordingly to dark & colorblind values
+     */
+    const switchTheme = () => {
+      if (dark() && colorblind()) toggleTheme('colorblindDark');
+      else if (dark() && !colorblind()) toggleTheme('dark');
+
+      if (!dark() && colorblind()) toggleTheme('colorblindLight');
+      else if (!dark() && !colorblind()) toggleTheme('light');
+    };
+
+    const setDark: SetTheme = (value: boolean) => {
+      localStorage.setItem('AE_UTBM_THEME_DARK', value.toString());
+      switchTheme();
+    };
+    const setColorblind: SetTheme = (value: boolean) => {
+      localStorage.setItem('AE_UTBM_THEME_COLORBLIND', value.toString());
+      switchTheme();
+    };
+
+    provide('isThemeDark', dark);
+    provide('isThemeColorblind', colorblind);
+    provide('setThemeDark', setDark);
+    provide('setThemeColorblind', setColorblind);
+
+    provide('theme', theme);
+    //#endregion
 
     return {
       theme,
       errorHandler,
-      toggleTheme: (str: string) => { theme.value = str; },
+      switchTheme,
     };
   },
-  methods: {
-    switchTheme() {
-      if (this.isDark && this.isColorblind) this.toggleTheme('colorblindDark');
-      else if (this.isDark && !this.isColorblind) this.toggleTheme('dark');
-
-      if (!this.isDark && this.isColorblind) this.toggleTheme('colorblindLight');
-      else if (!this.isDark && !this.isColorblind) this.toggleTheme('light');
-    },
-  },
   mounted() {
-    this.isDark = localStorage.getItem('isDark') === 'true' ? true : false || false;
-    this.isColorblind = localStorage.getItem('isColorblind') === 'true' ? true : false || false;
     this.switchTheme();
-
-    this.$watch('isDark', (newValue: boolean, oldValue: boolean) => {
-      if (newValue === oldValue) return;
-      localStorage.setItem('isDark', newValue.toString());
-      this.switchTheme();
-    });
-    this.$watch('isColorblind', (newValue: boolean, oldValue: boolean) => {
-      if (newValue === oldValue) return;
-      localStorage.setItem('isColorblind', newValue.toString());
-      this.switchTheme();
-    });
   },
 });
 

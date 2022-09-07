@@ -9,7 +9,7 @@ import localizePath from '@/utils/i18n/localizePath';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'sith-btn-localized',
+  name: 'localized-btn',
   props: {
     to: {
       type: String,

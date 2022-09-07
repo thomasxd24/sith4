@@ -1,19 +1,15 @@
 <template>
-  <sith-main-navbar></sith-main-navbar>
+  Profile
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SithMainNavbar from '@/components/SithMainNavbar.vue';
 import localizePath from '@/utils/i18n/localizePath';
 import userStore from '@/stores/user';
 import errorHandlerStore from '@/stores/errorHandler';
 
 export default defineComponent({
   name: 'ProfileView',
-  components: {
-    SithMainNavbar,
-  },
   setup() {
     const user = userStore();
     const errorHandler = errorHandlerStore();

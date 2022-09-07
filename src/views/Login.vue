@@ -2,7 +2,7 @@
   <div class="main">
     <v-row class="title">
       <v-col class="logo">
-        <v-img alt="logo" src="@/assets/ae_logo.png" />
+        <v-img alt="logo" src="@/assets/logo/ae_base.png" />
       </v-col>
       <v-col class="text">
         <span>Association des Étudiants</span>

@@ -1,20 +1,20 @@
 {
 	"lang_name": "English",
-	"lang_selector": "Select a language",
-	"theme_selector": "Select a theme",
-	"theme_colorblind": "Colorblind Mode",
-	"theme_dark": "Dark Mode",
-	"notifications": "Notifications",
-	"team_name": "The AE Dev Team",
-	"nav_bar": {
-		"btn_sign_in": "Sign in",
-		"btn_sign_up": "Sign up",
-		"btn_logout": "Logout"
-	},
-	"buttons": {
-		"go_back": "Go Back",
-		"submit": "Submit",
-		"see_all": "See All",
-		"mark_as_read": "Mark as read"
-	}
+	
+	"theme_colorblind": "Colorblind",
+	"theme_dark": "Dark",
+	"theme_light": "Light",
+	"theme_system": "System",
+
+	"navbar_sign_in": "Sign In",
+	"navbar_sign_up": "Sign Up",
+
+	"user_profile": "Profile",
+	"user_notifications": "Notifications",
+	"user_logout": "Logout",
+
+	"menu_store": "Store",
+	"menu_photos": "Photos",
+	"menu_service": "Services",
+	"menu_advantages": "Advantages"
 }

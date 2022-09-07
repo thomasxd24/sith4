@@ -1,8 +1,7 @@
 {
-	"about": "a-propos",
-	"sign-in": "connexion",
-	"sign-up": "inscription",
+	"sign-in": "inscription",
+	"sign-up": "connexion",
 	"profile": "profil",
 	"maintenance": "maintenance",
-	"password-reset": "réinitialisation-du-mot-de-passe"
+	"password-reset": "password-réinitialisation"
 }

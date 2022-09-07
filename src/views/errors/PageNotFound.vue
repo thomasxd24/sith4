@@ -1,6 +1,4 @@
 <template>
-  <sith-main-navbar />
-
   <main>
     <div>
       <h1>{{ $t("errors.page.not_found.title") }}</h1>
@@ -31,12 +29,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SithMainNavbar from '@/components/SithMainNavbar.vue';
 
 export default defineComponent({
   name: 'PageNotFoundView',
-  components: {
-    SithMainNavbar,
-  },
 });
 </script>

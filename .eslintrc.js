@@ -8,15 +8,19 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
-    'import/extensions': ['error', {
-      vue: 'always',
-      css: 'never' || 'always',
-    }],
+    'import/extensions': [
+      'error',
+      {
+        vue: 'always',
+        css: 'never' || 'always',
+      },
+    ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'max-len': ['error', { code: Infinity }],
     'no-await-in-loop': 'off',
     'linebreak-style': 'off',
+    'spaced-comment': ['error', 'always', { line: { markers: ['#region', '#endregion', 'region', 'endregion'] } }],
   },
   overrides: [
     {

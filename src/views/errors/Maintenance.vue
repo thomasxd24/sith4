@@ -1,6 +1,4 @@
 <template>
-  <sith-language-popup v-model="showLanguagePopup" />
-
   <main>
     <v-img class="gif" :src="getGIF" />
     <div>
@@ -43,13 +41,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SithLanguagePopup from '@/components/popups/SithLanguagePopup.vue';
 
 export default defineComponent({
   name: 'MaintenanceView',
-  components: {
-    SithLanguagePopup,
-  },
   data() {
     return {
       showLanguagePopup: false,

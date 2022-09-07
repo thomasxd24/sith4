@@ -5,9 +5,6 @@ module.exports = defineConfig({
 
   configureWebpack: {
     devtool: 'source-map',
-  },
-
-  configureWebpack: {
     experiments: {
       topLevelAwait: true,
     },
