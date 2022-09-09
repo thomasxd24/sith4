@@ -9,7 +9,7 @@
     <div class="what_a_name_for_a_class">
       <!-- TODO: Use a real page that ask the API here -->
       <localize-btn size="small" v-if="!isConnected" v-on:click="user.login('123')">{{ $t("navbar_sign_in") }}</localize-btn>
-      <localize-btn size="small" v-if="!isConnected">{{ $t("navbar_sign_up") }}</localize-btn>
+      <localize-btn size="small" v-if="!isConnected" to="/register">{{ $t("navbar_sign_up") }}</localize-btn>
     </div>
   </div>
 </template>

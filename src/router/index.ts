@@ -39,7 +39,7 @@ const langRouterOptions = {
 // Vue router options
 const routerOptions = {
   routes,
-  history: createWebHistory(process.env.BASE_URL), // we don't want the '#' in the routes system
+  history: createWebHistory(), // we don't want the '#' in the routes system
 };
 
 const router = createLangRouter(langRouterOptions, routerOptions);

@@ -7,9 +7,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Login.vue'),
   },
   {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: () => import('@/views/Login.vue'),
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/Register.vue'),
   },
   {
     path: '/password-reset',

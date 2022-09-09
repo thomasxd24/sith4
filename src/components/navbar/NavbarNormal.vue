@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :color="isDark() ? 'secondary' : 'tertiary'">
+  <v-app-bar :color="isDark() ? 'secondary' : 'tertiary'" style="position: inherit !important;">
     <div class="left">
       <v-col class="logo">
         <v-img aspect-ratio="1/1" width="62" height="62" :src="logo()" cover></v-img>

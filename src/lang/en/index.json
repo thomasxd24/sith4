@@ -16,5 +16,10 @@
 	"menu_store": "Store",
 	"menu_photos": "Photos",
 	"menu_service": "Services",
-	"menu_advantages": "Advantages"
+	"menu_advantages": "Advantages",
+
+	"buttons": {
+		"go_back": "Go Back",
+		"submit": "Submit"
+	}
 }

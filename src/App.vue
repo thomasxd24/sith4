@@ -2,7 +2,9 @@
   <v-app :theme="theme" style="background-color: #ecf2f8">
     <navbar-normal />
 
-    <router-view />
+    <main class="main">
+      <router-view />
+    </main>
 
     <v-snackbar
       v-model="errorHandler.displayed"
@@ -17,6 +19,31 @@
   </v-app>
 </template>
 
+<style lang="scss" scoped>
+  @media (min-width: 1012px) {
+    .main {
+      padding-right: 32px !important;
+      padding-left: 32px !important;
+    }
+  }
+  @media (min-width: 768px){
+    .main {
+      padding-right: 24px !important;
+      padding-left: 24px !important;
+    }
+  }
+
+  .main {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+    max-width: 1280px;
+    width: 100%;
+    margin-top: 32px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+</style>
+
 <script lang="ts">
 import { defineComponent, ref, provide } from 'vue';
 import {
@@ -30,6 +57,8 @@ export default defineComponent({
   components: { NavbarNormal },
   setup() {
     const errorHandler = errorHandlerStore();
+    const apiURL = process.env.VUE_APP_API_URL;
+    provide('apiURL', apiURL);
 
     //#region THEME HANDLER
     const theme = ref('light');
