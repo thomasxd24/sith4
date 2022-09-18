@@ -23,53 +23,53 @@
 </template>
 
 <style lang="scss" scoped>
-  .left, .right {
+.left, .right {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.right {
+  justify-content: flex-end;
+  padding-right: 10px;
+  gap: 40px;
+
+  & > .places {
     display: flex;
-    align-items: center;
-    width: 100%;
-    padding-left: 10px;
   }
+}
 
-  .right {
-    justify-content: flex-end;
-    padding-right: 10px;
-    gap: 40px;
+.logo {
+  max-width: 62px;
+  padding: 0;
+}
 
-    & > .places {
-      display: flex;
-    }
-  }
+.name {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .logo {
-    max-width: 62px;
-    padding: 0;
-  }
+.title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 24px;
+  max-height: 24px;
+}
 
-  .name {
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .title {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 24px;
-    max-height: 24px;
-  }
-
-  .subtitle {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 9.5px;
-    line-height: 10px;
-    height: 10px;
-    text-transform: uppercase;
-  }
+.subtitle {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 10px;
+  height: 10px;
+  text-transform: uppercase;
+}
 </style>
 
 <script lang="ts">

@@ -3,7 +3,7 @@ import themeStore from './theme';
 
 export default defineStore('document', {
   state: () => ({
-    title: 'Association des Étudiants de l\'Université de Belfort-Montbéliard',
+    title: "Association des Étudiants de l'Université de Belfort-Montbéliard",
   }),
   actions: {
     setPageTitle(str: string) {

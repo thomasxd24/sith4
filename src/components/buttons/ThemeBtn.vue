@@ -4,7 +4,7 @@
       <v-btn size="small" icon="mdi-white-balance-sunny" height="28" width="28" v-bind="props"></v-btn>
     </template>
 
-    <themed-list>
+    <themed-list :class="$vuetify.display.smAndUp ? '' : 'full'">
       <v-switch flat v-model="dark" class="theme" :label="$t('theme_dark')" hide-details />
       <v-switch disabled flat v-model="colorblind" class="theme" :label="$t('theme_colorblind')" hide-details />
     </themed-list>
@@ -12,11 +12,18 @@
 </template>
 
 <style lang="scss" scoped>
-  .theme {
-    padding-left: 10px;
-    padding-right: 20px;
-    opacity: 100%;
-  }
+.theme {
+  padding-left: 10px;
+  padding-right: 20px;
+  opacity: 100%;
+}
+
+.full {
+  top: 15px;
+  left: -12px;
+  z-index: 1;
+  width: calc(100vw);
+}
 </style>
 
 <style lang="scss">
@@ -56,7 +63,7 @@ export default defineComponent({
       this.theme.toggleColorblind();
     },
   },
-  mounted() {
+  beforeCreate() {
     this.theme.$subscribe(() => {
       this.dark = this.theme.isDark;
       this.colorblind = this.theme.isColorblind;

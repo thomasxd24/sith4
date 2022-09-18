@@ -1,6 +1,7 @@
 <template>
   <v-app :theme="theme.isDark ? 'dark' : 'light'" :class="theme.isDark ? '__background_color_primary' : '__background_color_white'">
-    <navbar-normal />
+    <navbar-normal v-if="$vuetify.display.smAndUp" />
+    <navbar-small v-else />
 
     <main class="main">
       <router-view />
@@ -51,10 +52,11 @@ import errorHandlerStore from '@/stores/errorHandler';
 import themeStore from '@/stores/theme';
 import userStore from '@/stores/user';
 import NavbarNormal from '@/components/navbar/NavbarNormal.vue';
+import NavbarSmall from './components/navbar/NavbarSmall.vue';
 
 export default defineComponent({
   name: 'App',
-  components: { NavbarNormal },
+  components: { NavbarNormal, NavbarSmall },
   setup() {
     const apiURL = process.env.VUE_APP_API_URL;
     provide('apiURL', apiURL);

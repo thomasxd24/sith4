@@ -4,7 +4,7 @@
       <v-btn size="small" icon="mdi-translate" height="28" width="28" v-bind="props"></v-btn>
     </template>
 
-    <themed-list>
+    <themed-list :class="$vuetify.display.smAndUp ? '' : 'full'">
       <v-list-item v-for="(lang, index) in links"
         :key="index"
         :class="lang.active ? 'lang active' : 'lang'"
@@ -18,32 +18,44 @@
 </template>
 
 <style lang="scss" scoped>
-  .lang {
+.lang {
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+
+  &-name {
+    text-align: right;
+    padding-right: 16px;
+    width: 120px;
+  }
+
+  &-flag {
+    width: 25px;
+  }
+
+  &:hover {
     background-color: transparent;
-    display: flex;
-    justify-content: space-between;
-    width: 150px;
-
-    &-name {
-      text-align: right;
-      padding-right: 16px;
-      width: 120px;
-    }
-
-    &-flag {
-      width: 25px;
-    }
-
-    &:hover {
-      background-color: transparent;
-    }
   }
+}
 
-  .lang.active > .v-list-item__content {
-    > .lang-name {
-      font-weight: bolder;
-    }
+.lang.active > .v-list-item__content {
+  > .lang-name {
+    font-weight: bolder;
   }
+}
+
+.full {
+  top: 15px;
+  left: -12px;
+  z-index: 1;
+  width: calc(100vw);
+
+  > .lang {
+    justify-content: center;
+    width: 100%;
+  }
+}
 </style>
 
 <style lang="scss">

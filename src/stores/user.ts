@@ -56,6 +56,7 @@ export default defineStore('user', {
   actions: {
     login(token: string, uuid: string): void {
       this.token = token;
+      this.uuid = uuid;
       localStorage.setItem('AE_UTBM_CONNEXION_TOKEN', token);
       localStorage.setItem('AE_UTBM_CONNEXION_USER_UUID', uuid);
       this.fetchFromAPI();

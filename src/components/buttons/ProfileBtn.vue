@@ -6,7 +6,7 @@
       </v-btn>
     </template>
 
-    <themed-list>
+    <themed-list :class="$vuetify.display.smAndUp ? '' : 'full'">
       <v-list-item @click="() => ''">
         <v-list-item-title>
           <localized-link to="profile" style="" class="item">{{ $t('user_profile') }}</localized-link>
@@ -24,14 +24,21 @@
   </v-menu>
 </template>
 
-<style scoped>
-  .v-list-item-title,
-  .item {
-    width: 100%;
-    text-align: right;
-    text-decoration: none;
-    color: inherit;
-  }
+<style lang="scss" scoped>
+.v-list-item-title,
+.item {
+  width: 100%;
+  text-align: right;
+  text-decoration: none;
+  color: inherit;
+}
+
+.full {
+  top: 15px;
+  left: -12px;
+  z-index: 1;
+  width: calc(100vw);
+}
 </style>
 
 <script lang="ts">
