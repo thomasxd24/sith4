@@ -1,5 +1,5 @@
 <template>
-  <v-app :theme="theme" style="background-color: #ecf2f8">
+  <v-app :theme="theme">
     <navbar-normal />
 
     <main class="main">
@@ -34,11 +34,12 @@
   }
 
   .main {
+    padding-bottom: 20px;
     padding-right: 16px !important;
     padding-left: 16px !important;
     max-width: 1280px;
     width: 100%;
-    margin-top: 32px;
+    margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -48,7 +49,7 @@
 import { defineComponent, ref, provide } from 'vue';
 import {
   ThemeNames, GetTheme, SetTheme,
-} from '@/types/theme';
+} from '@/types/injected';
 import errorHandlerStore from '@/stores/errorHandler';
 import NavbarNormal from '@/components/navbar/NavbarNormal.vue';
 
@@ -88,10 +89,12 @@ export default defineComponent({
 
     const setDark: SetTheme = (value: boolean) => {
       localStorage.setItem('AE_UTBM_THEME_DARK', value.toString());
+      window.location.reload();
       switchTheme();
     };
     const setColorblind: SetTheme = (value: boolean) => {
       localStorage.setItem('AE_UTBM_THEME_COLORBLIND', value.toString());
+      window.location.reload();
       switchTheme();
     };
 
@@ -103,9 +106,16 @@ export default defineComponent({
     provide('theme', theme);
     //#endregion
 
+    const themedLogoURL = () => {
+      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
+      return url(`./${dark() ? 'ae_white' : 'ae_base'}.png`);
+    };
+    provide('themedLogoURL', themedLogoURL);
+
     return {
       theme,
       errorHandler,
+      dark,
       switchTheme,
     };
   },

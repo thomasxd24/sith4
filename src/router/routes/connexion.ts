@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/sign-in',
     name: 'sign-in',
-    component: () => import('@/views/Login.vue'),
+    component: () => import('@/views/Home.vue'),
   },
   {
     path: '/register',
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/password-reset',
     name: 'password-reset',
-    component: () => import('@/views/ResetPassword.vue'),
+    component: () => import('@/views/Home.vue'),
   },
 ];
 

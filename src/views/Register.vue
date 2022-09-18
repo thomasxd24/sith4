@@ -1,209 +1,149 @@
 <template>
   <div class="container">
-    <v-card>
-      <v-img :src="logo()" height="42"/>
-      <v-card-title class="justify-center">
-        {{ $t('register.title') }}
-      </v-card-title>
-      <v-card-text>
-        <v-form v-model="validForm" lazy-validation>
-          <v-text-field
-            :label="$t('register.first_name')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.login"
-            :rules="rules.login"
-            prepend-icon=""
-          />
-          <v-text-field
-            :label="$t('register.last_name')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.login"
-            :rules="rules.login"
-            prepend-icon=""
-          />
-          <v-text-field
-            :label="$t('register.username')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.login"
-            :rules="rules.login"
-            prepend-icon=""
-          />
-          <v-text-field
-            :label="$t('register.birth_date')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.login"
-            :rules="rules.login"
-            prepend-icon="mdi-cake-variant"
-          />
-          <v-text-field
-            :label="$t('register.email')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.login"
-            :rules="rules.login"
-            prepend-icon="mdi-at"
-          />
-          <v-text-field
-            :label="$t('register.password')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.password"
-            :rules="rules.password"
-            :prepend-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPassword ? 'text' : 'password'"
-            @click:prepend="showPassword = !showPassword"
-          />
-          <v-text-field
-            :label="$t('register.confirm_password')"
-            hide-details
-            clearable
-            variant="outlined"
-            v-model="form.confirmPassword"
-            :rules="rules.confirmPassword"
-            :prepend-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showConfirmPassword ? 'text' : 'password'"
-            @click:prepend="showConfirmPassword = !showConfirmPassword"
-          />
-        </v-form>
-      </v-card-text>
-      <v-card-text v-if="type === 'sign-in'">
-        <v-row class="justify-center mt-2 mb-2">
-          <localized-link class="forgot_password" to="/password-reset">{{ $t('register.forgot_password') }}</localized-link>
+    <h2>{{ $t('register.title') }}</h2>
+    <template v-if="!submitted">
+      <v-form v-model="valid" ref="form" class="form" lazy-validation>
+        <v-text-field
+          :label="$t('register.username')"
+          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          required
+          variant="solo"
+          v-model="form.username"
+          :rules="rules.username"
+          prepend-inner-icon="mdi-account"
+        />
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :label="$t('register.first_name')"
+              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              required
+              variant="solo"
+              v-model="form.first_name"
+              :rules="rules.first_name"
+              prepend-inner-icon="mdi-format-color-text"
+            />
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :label="$t('register.last_name')"
+              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              required
+              variant="solo"
+              v-model="form.last_name"
+              :rules="rules.last_name"
+            />
+          </v-col>
         </v-row>
-      </v-card-text>
-      <v-card-actions class="justify-center">
-        <v-btn class="bg-tertiary" @click="$router.go(-1)">{{ $t('buttons.go_back') }}</v-btn>
-        <v-btn class="bg-secondary" @click="''">{{ $t('buttons.submit') }}</v-btn>
-      </v-card-actions>
-    </v-card>
+        <v-text-field
+          :label="$t('register.birth_date')"
+          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          class="datepicker"
+          type="date"
+          required
+          variant="solo"
+          v-model="form.birth_date"
+          :rules="rules.birth_date"
+          prepend-inner-icon="mdi-cake-variant"
+        />
+
+        <v-text-field
+          :label="$t('register.email')"
+          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          required
+          variant="solo"
+          v-model="form.email"
+          :rules="rules.email"
+          prepend-inner-icon="mdi-at"
+        />
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :label="$t('register.password')"
+              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              required
+              variant="solo"
+              v-model="form.password"
+              :rules="rules.password"
+              :prepend-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showPassword ? 'text' : 'password'"
+              @click:prepend-inner="showPassword = !showPassword"
+            />
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-text-field
+              :label="$t('register.confirm_password')"
+              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              required
+              variant="solo"
+              v-model="form.confirmPassword"
+              :rules="rules.confirmPassword"
+              :type="showPassword ? 'text' : 'password'"
+            />
+          </v-col>
+        </v-row>
+      </v-form>
+      <div class="btn">
+        <themed-btn color="var(--v-theme-danger)" @click="$router.go(-1)">{{ $t('buttons.go_back') }}</themed-btn>
+        <themed-btn color="var(--v-theme-success)" :disabled="!valid"  @click="validate" >{{ $t('buttons.submit') }}</themed-btn>
+      </div>
+    </template>
+    <div v-else>
+      <p align="center">{{ $t('register.confirmation.line_1') }}</p>
+      <p align="center"><a :href="`mailto:${form.email}`">{{ form.email }}</a></p>
+      <p align="center">{{ $t('register.confirmation.line_2') }}</p>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
-.main {
-  height: auto;
+.btns {
+  gap: 20px;
 }
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 50px;
   min-height: 70vh;
 }
 
-$max-width: 500px;
-
-.forgot_password {
-  color: inherit;
-  margin-top: 10px;
-  text-decoration: none;
-}
-
-.main {
-  height: 100%;
+.form {
+  width: 100%;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 5px;
 }
 
-.logo {
-  width: 100px;
-}
-
-.title {
-  margin: 0 auto;
+.btn, .row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: $max-width;
-  flex: none;
-
-  > * {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  > .logo {
-    max-height: 100px;
-    max-width: fit-content;
-
-    > .v-img {
-      width: 100px;
-    }
-  }
-
-  > .text {
-    > *:first-child {
-      font-weight: 500;
-    }
-
-    > *:last-child {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-    }
-  }
+  gap: 20px
 }
-
-.v-card {
-  max-width: $max-width;
-  width: 100%;
-  margin: 0 auto;
-  padding: 18px 5px;
-
-  &-text {
-    padding: 0 20px;
-  }
-
-  &-title {
-    text-transform: uppercase;
-  }
-}
-
-.v-text-field {
-  margin: 10px 0;
-}
-</style>
-
-<style>
-  .v-field__field {
-    padding: 0;
-    align-items: center;
-  }
 </style>
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
 import localizePath from '@/utils/i18n/localizePath';
+import ThemedBtn from '@/components/themed/ThemedBtn.vue';
 import documentStore from '@/stores/document';
 import userStore from '@/stores/user';
 import errorHandlerStore from '@/stores/errorHandler';
-import { GetTheme } from '@/types/theme';
+import axios from 'axios';
+
+type formKeys = 'first_name' | 'last_name' | 'username' | 'birth_date' | 'email' | 'password' | 'confirmPassword';
 
 interface Data {
-  type: 'sign-in' | 'sign-up';
+  valid: boolean;
+  submitted: boolean;
   form: {
-    login: string;
-    password: string;
-    confirmPassword: string;
+    [key in formKeys]: string;
   };
   rules: {
-    login: Array<(input: string) => string | true>;
-    password: Array<(input: string) => string | true>;
-    confirmPassword: Array<(input: string) => string | true>;
+    [key in formKeys]: Array<(input: string) => string | true>
   },
   showPassword: boolean;
   showConfirmPassword: boolean;
@@ -211,69 +151,114 @@ interface Data {
 
 export default defineComponent({
   name: 'RegisterView',
+  components: { ThemedBtn },
   data() {
     const data: Data = {
-      type: 'sign-in',
+      valid: true,
+      submitted: false,
       form: {
-        login: '',
+        first_name: '',
+        last_name: '',
+        username: '',
+        birth_date: '',
+        email: '',
         password: '',
         confirmPassword: '',
       },
       rules: {
-        login: [
-          (input: string) => !!input || 'The login is required',
-          (input: string) => /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input) || 'Login must be an email',
+        first_name: [
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.first_name').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 20) || this.$t('register.rules.first_name_invalid', { min: 3, max: 20 }),
+        ],
+        last_name: [
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.last_name').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('register.rules.last_name_invalid', { min: 3, max: 30 }),
+        ],
+        username: [
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.username').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('register.rules.username_invalid', { min: 3, max: 30 }),
+          (input: string) => (input.replace(/\s/g, '').length === input.length) || this.$t('register.rules.no_whitespace', { field: this.$t('register.username').toLowerCase() }),
+        ],
+        birth_date: [
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.birth_date').toLowerCase() }),
+          (input: string) => {
+            const inputDate = new Date(input);
+            const todayDate = new Date();
+
+            if (todayDate < inputDate) {
+              return this.$t('register.rules.date.invalid');
+            }
+
+            if (todayDate.getFullYear() - inputDate.getFullYear() <= 16) {
+              return this.$t('register.rules.date.year_invalid', { min: 16, max: 100 });
+            }
+
+            if (todayDate.getFullYear() - inputDate.getFullYear() > 100) {
+              return this.$t('register.rules.date.year_invalid', { min: 16, max: 100 });
+            }
+
+            return true;
+          },
+        ],
+        email: [
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.email').toLowerCase() }),
+          (input: string) => /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input) || this.$t('register.rules.email_invalid'),
         ],
         password: [
-          (input: string) => !!input || 'The password is required',
-          (input: string) => input.length >= 6 || 'The password must be at least 6 characters',
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.password').toLowerCase() }),
+          (input: string) => input.length >= 8 || this.$t('register.rules.password_length', { n: 8 }),
         ],
         confirmPassword: [
-          (input: string) => !!input || 'The password is required',
-          (input: string) => this.checkPasswords(input) || 'The passwords do not match',
+          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.password').toLowerCase() }),
+          (input: string) => this.checkPasswords(input) || this.$t('register.rules.password_mismatch'),
         ],
       },
       showPassword: false,
       showConfirmPassword: false,
     };
-
     return data;
   },
   setup() {
-    const doc = documentStore();
-    const user = userStore();
-    const errorHandler = errorHandlerStore();
-
-    const isDark: GetTheme = inject('isThemeDark') || (() => false);
+    const isDark: () => boolean = inject('isThemeDark') || (() => false);
+    const apiURL: string = inject('apiURL') || '';
 
     return {
-      doc,
-      user,
-      errorHandler,
+      doc: documentStore(),
+      user: userStore(),
+      errorHandler: errorHandlerStore(),
       isDark,
+      apiURL,
     };
-  },
-  computed: {
-    validForm() {
-      return true;
-    },
   },
   mounted() {
     if (this.user.isUserLoggedIn()) {
       this.$router.push(localizePath(`/profile/${this.user.username.toLowerCase()}`, this.$i18n.locale, this.$route.path, this.$router));
       this.errorHandler.show('You are already logged in', { color: 'error' });
     }
-
-    this.type = this.$router.currentRoute.value.name as Data['type'];
-    this.doc.setPageTitle(this.$t(`login_page.titles.${this.type}`));
+    this.doc.setPageTitle(this.$t('register.title'));
   },
   methods: {
     checkPasswords(input: string) {
       return this.form.password === input;
     },
-    logo(): string {
-      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./${this.isDark() ? 'ae_white' : 'ae_base'}.png`);
+    validate() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this.$refs.form as any).validate();
+
+      const data = {
+        email: this.form.email,
+        password: this.form.password,
+        username: this.form.username,
+        firstName: this.form.first_name,
+        lastName: this.form.last_name,
+        birthDate: new Date(this.form.birth_date),
+      };
+
+      axios.post(`${this.apiURL}/auth/register`, data)
+        .then(() => {
+          this.submitted = true;
+        })
+        .catch((err: Error) => this.errorHandler.axiosError(err));
     },
   },
 });

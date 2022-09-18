@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "pinia": "^2.0.14",
     "roboto-fontface": "*",
@@ -17,7 +18,7 @@
     "vue-i18n": "^9.1.0",
     "vue-lang-router": "^2.1.1",
     "vue-router": "^4.0.3",
-    "vuetify": "^3.0.0-beta.0",
+    "vuetify": "^3.0.0-beta.10",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {

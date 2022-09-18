@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import { GetTheme, SetTheme } from '@/types/theme';
+import { GetTheme, SetTheme } from '@/types/injected';
 import ThemedList from '@/components/themed/ThemedList.vue';
 
 export default defineComponent({

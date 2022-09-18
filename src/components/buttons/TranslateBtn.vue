@@ -46,6 +46,14 @@
   }
 </style>
 
+<style lang="scss">
+.lang {
+  > .v-list-item__content {
+    display: flex !important;
+  }
+}
+</style>
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { translations } from '@/lang';

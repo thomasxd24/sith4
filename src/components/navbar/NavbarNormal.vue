@@ -2,7 +2,7 @@
   <v-app-bar :color="isDark() ? 'secondary' : 'tertiary'" style="position: inherit !important;">
     <div class="left">
       <v-col class="logo">
-        <v-img aspect-ratio="1/1" width="62" height="62" :src="logo()" cover></v-img>
+        <themed-logo aspect-ratio="1/1" width="62" height="62" cover/>
       </v-col>
       <v-col class="name">
         <div class="title">Association des Étudiants</div>
@@ -22,21 +22,17 @@
   </v-app-bar>
 </template>
 
-<style lang="scss">
-  .v-overlay__content {
-    transform: translate(calc(-100% + 28px));
-  }
-</style>
-
 <style lang="scss" scoped>
   .left, .right {
     display: flex;
     align-items: center;
     width: 100%;
+    padding-left: 10px;
   }
 
   .right {
     justify-content: flex-end;
+    padding-right: 10px;
     gap: 40px;
 
     & > .places {
@@ -78,19 +74,22 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import { GetTheme } from '@/types/theme';
 import userStore from '@/stores/user';
 import NavbarPlace from './NavbarPlace.vue';
 import NavbarButtons from './NavbarButtons.vue';
+import ThemedLogo from '../themed/ThemedLogo.vue';
 
 export default defineComponent({
   name: 'navbar-normal',
-  components: { NavbarPlace, NavbarButtons },
+  components: { NavbarPlace, NavbarButtons, ThemedLogo },
   setup() {
     const user = userStore();
-    const isDark: GetTheme = inject('isThemeDark') || (() => false);
+    const isDark: () => boolean = inject('isThemeDark') || (() => false);
 
-    return { user, isDark };
+    return {
+      user,
+      isDark,
+    };
   },
   computed: {
     // TODO: use an API call here & store them in a store
@@ -100,12 +99,6 @@ export default defineComponent({
         { name: 'Gommette', status: 'offline' },
         { name: 'MDE', status: 'unknown' },
       ];
-    },
-  },
-  methods: {
-    logo(): string {
-      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./${this.isDark() ? 'ae_white' : 'ae_base'}.png`);
     },
   },
 });

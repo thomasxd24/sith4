@@ -1,4 +1,11 @@
+import axios, { AxiosError } from 'axios';
 import { defineStore } from 'pinia';
+
+export interface APIError {
+  message: Array<string> | string;
+  statusCode: number;
+  error: Error;
+}
 
 export default defineStore('errorHandler', {
   state: () => ({
@@ -17,6 +24,18 @@ export default defineStore('errorHandler', {
       }
 
       this.displayed = true;
+    },
+    axiosError(error: Error | AxiosError<APIError>) {
+      if (axios.isAxiosError(error)) {
+        const title = `${(error.response?.data as APIError).statusCode} - ${(error.response?.data as APIError)?.error ?? (error.response?.data as APIError)?.message}`;
+
+        this.show(title, {
+          stack: error,
+          color: 'error',
+        });
+      } else {
+        this.show(error.message, { stack: error, color: 'error' });
+      }
     },
   },
 });

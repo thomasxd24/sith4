@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import { GetTheme } from '@/types/theme';
+import { GetTheme } from '@/types/injected';
 
 export default defineComponent({
   name: 'themed-list',

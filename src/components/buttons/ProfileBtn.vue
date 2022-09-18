@@ -2,7 +2,7 @@
   <v-menu>
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props" size="small" icon height="28" width="28" >
-        <v-img :src="picture" />
+        <v-img :src="picture" height="28" width="28" />
       </v-btn>
     </template>
 
@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import { GetTheme } from '@/types/theme';
+import { GetTheme } from '@/types/injected';
 import userStore from '@/stores/user';
 import ThemedList from '@/components/themed/ThemedList.vue';
 
