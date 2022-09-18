@@ -22,12 +22,12 @@
     background-color: transparent;
     display: flex;
     justify-content: space-between;
-    width: 145px;
+    width: 150px;
 
     &-name {
       text-align: right;
       padding-right: 16px;
-      width: 96px;
+      width: 120px;
     }
 
     &-flag {
@@ -39,9 +39,9 @@
     }
   }
 
-  .lang.active {
+  .lang.active > .v-list-item__content {
     > .lang-name {
-      font-weight: bold;
+      font-weight: bolder;
     }
   }
 </style>
