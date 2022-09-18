@@ -129,5 +129,13 @@ export default defineStore('user', {
       const url = require.context('@/assets/icons/', false, /\.(png|jpe?g|svg)$/);
       return url(`./user_no_picture_${theme.dark ? 'dark' : 'light'}.svg`);
     },
+    banner(): string {
+      // TODO: try to get banner from API first
+      return 'https://c.tenor.com/4hhOJp5zRsYAAAAC/the-office-chili.gif';
+    },
+    promoLogo(): string {
+      // TODO: try to get promo logo from API first
+      return 'https://c.tenor.com/4hhOJp5zRsYAAAAC/the-office-chili.gif';
+    },
   },
 });
