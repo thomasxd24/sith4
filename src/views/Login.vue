@@ -101,7 +101,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    if (this.user.isLoggedIn) {
+    if (this.user.isLoggedIn()) {
       this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
       this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
     }
@@ -123,7 +123,7 @@ export default defineComponent({
 
       axios.post(`${this.apiURL}/auth/login`, data)
         .then((res) => {
-          this.user.login(res.data.token);
+          this.user.login(res.data.token, res.data.user.uuid);
           this.$router.push({ name: 'profile' });
         })
         .catch((err: Error) => this.errorHandler.axiosError(err));

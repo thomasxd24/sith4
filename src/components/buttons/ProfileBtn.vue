@@ -17,7 +17,7 @@
         <v-list-item-title class="item">{{ $t('user_notifications') }}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item @click="user.logout()">
+      <v-list-item @click="logout()">
         <v-list-item-title class="item __color_danger">{{ $t('user_logout') }}</v-list-item-title>
       </v-list-item>
     </themed-list>
@@ -48,6 +48,12 @@ export default defineComponent({
       user: userStore(),
       theme: themeStore(),
     };
+  },
+  methods: {
+    logout() {
+      this.user.logout();
+      this.$router.push({ name: 'home' });
+    },
   },
 });
 </script>

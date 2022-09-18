@@ -1,6 +1,7 @@
 <template>
   <div class="buttons">
-    <v-btn v-if="isConnected" size="small" icon="mdi-magnify" height="28" width="28"></v-btn>
+    <!-- TODO; implement the search feature -->
+    <v-btn v-if="isConnected" size="small" icon="mdi-magnify" height="28" width="28" disabled></v-btn>
 
     <translate-btn />
     <theme-btn />

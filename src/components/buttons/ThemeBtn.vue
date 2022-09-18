@@ -57,9 +57,10 @@ export default defineComponent({
     },
   },
   mounted() {
-    // set default values to stored values
-    this.dark = this.theme.isDark;
-    this.colorblind = this.theme.isColorblind;
+    this.theme.$subscribe(() => {
+      this.dark = this.theme.isDark;
+      this.colorblind = this.theme.isColorblind;
+    });
   },
 });
 </script>

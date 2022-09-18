@@ -231,7 +231,7 @@ export default defineComponent({
     return data;
   },
   mounted() {
-    if (this.user.isLoggedIn) {
+    if (this.user.isLoggedIn()) {
       this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
       this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
     }

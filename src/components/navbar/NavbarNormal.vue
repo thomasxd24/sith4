@@ -10,13 +10,13 @@
       </v-col>
     </div>
     <div class="right">
-      <div class="places" v-if="user.isLoggedIn">
+      <div class="places" v-if="user.isLoggedIn()">
         <template v-for="place in places" v-bind:key="place" >
           <navbar-place :place="place.name" :status="place.status" />
         </template>
       </div>
 
-      <navbar-buttons :isConnected="user.isLoggedIn" />
+      <navbar-buttons :isConnected="user.isLoggedIn()" />
     </div>
 
   </v-app-bar>

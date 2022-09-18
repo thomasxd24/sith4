@@ -49,22 +49,24 @@
 import { defineComponent, provide } from 'vue';
 import errorHandlerStore from '@/stores/errorHandler';
 import themeStore from '@/stores/theme';
+import userStore from '@/stores/user';
 import NavbarNormal from '@/components/navbar/NavbarNormal.vue';
 
 export default defineComponent({
   name: 'App',
   components: { NavbarNormal },
   setup() {
-    const theme = themeStore();
     const apiURL = process.env.VUE_APP_API_URL;
     provide('apiURL', apiURL);
 
     return {
-      theme,
+      theme: themeStore(),
+      user: userStore(),
       errorHandler: errorHandlerStore(),
     };
   },
   mounted() {
+    this.user.loadFromStorage();
     this.theme.loadFromStorage();
   },
 });
