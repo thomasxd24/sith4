@@ -35,23 +35,24 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import { GetTheme } from '@/types/injected';
+import { defineComponent } from 'vue';
 import userStore from '@/stores/user';
+import themeStore from '@/stores/theme';
 import ThemedList from '@/components/themed/ThemedList.vue';
 
 export default defineComponent({
   name: 'profile-btn',
   components: { ThemedList },
   setup() {
-    const user = userStore();
-    const isDark: GetTheme = inject('isThemeDark') || (() => false);
-    return { user, isDark };
+    return {
+      user: userStore(),
+      theme: themeStore(),
+    };
   },
   computed: {
     picture(): string {
       const url = require.context('@/assets/icons/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./user_no_picture_${this.isDark() ? 'dark' : 'light'}.svg`);
+      return url(`./user_no_picture_${this.theme.isDark() ? 'dark' : 'light'}.svg`);
     },
   },
 });

@@ -7,7 +7,7 @@
       <v-form v-model="valid" ref="form" class="form" lazy-validation>
         <v-text-field
           :label="$t('connexion.username')"
-          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
           v-model="form.username"
@@ -18,7 +18,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.first_name')"
-              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.first_name"
@@ -29,7 +29,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.last_name')"
-              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.last_name"
@@ -39,7 +39,7 @@
         </v-row>
         <v-text-field
           :label="$t('connexion.register.birth_date')"
-          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
           class="datepicker"
           type="date"
           required
@@ -51,7 +51,7 @@
 
         <v-text-field
           :label="$t('connexion.email')"
-          :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
           v-model="form.email"
@@ -62,7 +62,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.password')"
-              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.password"
@@ -75,7 +75,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.confirm_password')"
-              :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.confirmPassword"
@@ -132,6 +132,7 @@ import ThemedBtn from '@/components/themed/ThemedBtn.vue';
 import documentStore from '@/stores/document';
 import userStore from '@/stores/user';
 import errorHandlerStore from '@/stores/errorHandler';
+import themeStore from '@/stores/theme';
 import axios from 'axios';
 
 type formKeys = 'first_name' | 'last_name' | 'username' | 'birth_date' | 'email' | 'password' | 'confirmPassword';
@@ -152,6 +153,17 @@ interface Data {
 export default defineComponent({
   name: 'RegisterView',
   components: { ThemedBtn },
+  setup() {
+    const apiURL: string = inject('apiURL') || '';
+
+    return {
+      doc: documentStore(),
+      user: userStore(),
+      errorHandler: errorHandlerStore(),
+      theme: themeStore(),
+      apiURL,
+    };
+  },
   data() {
     const data: Data = {
       valid: true,
@@ -217,18 +229,6 @@ export default defineComponent({
       showConfirmPassword: false,
     };
     return data;
-  },
-  setup() {
-    const isDark: () => boolean = inject('isThemeDark') || (() => false);
-    const apiURL: string = inject('apiURL') || '';
-
-    return {
-      doc: documentStore(),
-      user: userStore(),
-      errorHandler: errorHandlerStore(),
-      isDark,
-      apiURL,
-    };
   },
   mounted() {
     if (this.user.isUserLoggedIn()) {

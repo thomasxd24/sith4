@@ -6,7 +6,7 @@
 
     <themed-list>
       <v-switch flat v-model="dark" class="theme" :label="$t('theme_dark')" hide-details />
-      <v-switch flat v-model="colorblind" class="theme" :label="$t('theme_colorblind')" hide-details />
+      <v-switch disabled flat v-model="colorblind" class="theme" :label="$t('theme_colorblind')" hide-details />
     </themed-list>
   </v-menu>
 </template>
@@ -27,8 +27,8 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import { GetTheme, SetTheme } from '@/types/injected';
+import { defineComponent } from 'vue';
+import themeStore from '@/stores/theme';
 import ThemedList from '@/components/themed/ThemedList.vue';
 
 export default defineComponent({
@@ -41,32 +41,25 @@ export default defineComponent({
     };
   },
   setup() {
-    const isThemeDark: GetTheme = inject('isThemeDark') || (() => false);
-    const isThemeColorblind: GetTheme = inject('isThemeColorblind') || (() => false);
-    const setThemeDark: SetTheme = inject('setThemeDark') || (() => false);
-    const setThemeColorblind: SetTheme = inject('setThemeColorblind') || (() => false);
     return {
-      isThemeDark,
-      isThemeColorblind,
-      setThemeDark,
-      setThemeColorblind,
+      theme: themeStore(),
     };
   },
   watch: {
     // Watch for slider changes -> update associated theme
     dark(value: boolean) {
-      if (value === this.isThemeDark()) return;
-      this.setThemeDark(value);
+      if (value === this.theme.isDark()) return;
+      this.theme.toggleDark();
     },
     colorblind(value: boolean) {
-      if (value === this.isThemeColorblind()) return;
-      this.setThemeColorblind(value);
+      if (value === this.theme.isColorblind()) return;
+      this.theme.toggleColorblind();
     },
   },
   mounted() {
     // set default values to stored values
-    this.dark = this.isThemeDark();
-    this.colorblind = this.isThemeColorblind();
+    this.dark = this.theme.isDark();
+    this.colorblind = this.theme.isColorblind();
   },
 });
 </script>

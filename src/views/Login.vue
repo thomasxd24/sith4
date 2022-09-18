@@ -6,7 +6,7 @@
     <v-form v-model="valid" ref="form" class="form" lazy-validation>
       <v-text-field
         :label="`${$t('connexion.username')}/${$t('connexion.email')}`"
-        :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+        :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
         required
         variant="solo"
         v-model="form.email_or_username"
@@ -15,7 +15,7 @@
       />
       <v-text-field
         :label="$t('connexion.password')"
-        :bg-color="isDark() ? 'tertiary' : 'light_gray'"
+        :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
         required
         variant="solo"
         v-model="form.password"
@@ -64,6 +64,7 @@ import { defineComponent, inject } from 'vue';
 import ThemedBtn from '@/components/themed/ThemedBtn.vue';
 import errorHandlerStore from '@/stores/errorHandler';
 import userStore from '@/stores/user';
+import themeStore from '@/stores/theme';
 
 import axios from 'axios';
 import localizePath from '@/utils/i18n/localizePath';
@@ -72,12 +73,11 @@ export default defineComponent({
   name: 'LoginView',
   components: { ThemedBtn },
   setup() {
-    const isDark: () => boolean = inject('isThemeDark') || (() => false);
     const apiURL: string = inject('apiURL') || '';
 
     return {
-      isDark,
       apiURL,
+      theme: themeStore(),
       errorHandler: errorHandlerStore(),
       user: userStore(),
     };

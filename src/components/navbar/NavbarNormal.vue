@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :color="isDark() ? 'secondary' : 'tertiary'" style="position: inherit !important;">
+  <v-app-bar :color="theme.isDark() ? 'secondary' : 'tertiary'" style="position: inherit !important;">
     <div class="left">
       <v-col class="logo">
         <themed-logo aspect-ratio="1/1" width="62" height="62" cover/>
@@ -73,7 +73,8 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent } from 'vue';
+import themeStore from '@/stores/theme';
 import userStore from '@/stores/user';
 import NavbarPlace from './NavbarPlace.vue';
 import NavbarButtons from './NavbarButtons.vue';
@@ -83,12 +84,9 @@ export default defineComponent({
   name: 'navbar-normal',
   components: { NavbarPlace, NavbarButtons, ThemedLogo },
   setup() {
-    const user = userStore();
-    const isDark: () => boolean = inject('isThemeDark') || (() => false);
-
     return {
-      user,
-      isDark,
+      theme: themeStore(),
+      user: userStore(),
     };
   },
   computed: {
