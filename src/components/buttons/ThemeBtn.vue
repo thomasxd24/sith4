@@ -48,18 +48,18 @@ export default defineComponent({
   watch: {
     // Watch for slider changes -> update associated theme
     dark(value: boolean) {
-      if (value === this.theme.isDark()) return;
+      if (value === this.theme.isDark) return;
       this.theme.toggleDark();
     },
     colorblind(value: boolean) {
-      if (value === this.theme.isColorblind()) return;
+      if (value === this.theme.isColorblind) return;
       this.theme.toggleColorblind();
     },
   },
   mounted() {
     // set default values to stored values
-    this.dark = this.theme.isDark();
-    this.colorblind = this.theme.isColorblind();
+    this.dark = this.theme.isDark;
+    this.colorblind = this.theme.isColorblind;
   },
 });
 </script>

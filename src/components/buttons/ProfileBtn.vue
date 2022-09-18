@@ -2,7 +2,7 @@
   <v-menu>
     <template v-slot:activator="{ props }">
       <v-btn v-bind="props" size="small" icon height="28" width="28" >
-        <v-img :src="picture" height="28" width="28" />
+        <v-img :src="user.picture" height="28" width="28" />
       </v-btn>
     </template>
 
@@ -48,12 +48,6 @@ export default defineComponent({
       user: userStore(),
       theme: themeStore(),
     };
-  },
-  computed: {
-    picture(): string {
-      const url = require.context('@/assets/icons/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./user_no_picture_${this.theme.isDark() ? 'dark' : 'light'}.svg`);
-    },
   },
 });
 </script>

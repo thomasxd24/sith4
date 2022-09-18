@@ -6,7 +6,7 @@
     <v-form v-model="valid" ref="form" class="form" lazy-validation>
       <v-text-field
         :label="`${$t('connexion.username')}/${$t('connexion.email')}`"
-        :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+        :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
         required
         variant="solo"
         v-model="form.email_or_username"
@@ -15,7 +15,7 @@
       />
       <v-text-field
         :label="$t('connexion.password')"
-        :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+        :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
         required
         variant="solo"
         v-model="form.password"
@@ -101,7 +101,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    if (this.user.isUserLoggedIn()) {
+    if (this.user.isLoggedIn) {
       this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
       this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
     }

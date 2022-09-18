@@ -7,7 +7,7 @@
       <v-form v-model="valid" ref="form" class="form" lazy-validation>
         <v-text-field
           :label="$t('connexion.username')"
-          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
           v-model="form.username"
@@ -18,7 +18,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.first_name')"
-              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.first_name"
@@ -29,7 +29,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.last_name')"
-              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.last_name"
@@ -39,7 +39,7 @@
         </v-row>
         <v-text-field
           :label="$t('connexion.register.birth_date')"
-          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
           class="datepicker"
           type="date"
           required
@@ -51,7 +51,7 @@
 
         <v-text-field
           :label="$t('connexion.email')"
-          :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+          :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
           v-model="form.email"
@@ -62,7 +62,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.password')"
-              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.password"
@@ -75,7 +75,7 @@
           <v-col cols="12" sm="6">
             <v-text-field
               :label="$t('connexion.register.confirm_password')"
-              :bg-color="theme.isDark() ? 'tertiary' : 'light_gray'"
+              :bg-color="theme.isDark ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
               v-model="form.confirmPassword"
@@ -231,7 +231,7 @@ export default defineComponent({
     return data;
   },
   mounted() {
-    if (this.user.isUserLoggedIn()) {
+    if (this.user.isLoggedIn) {
       this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
       this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
     }

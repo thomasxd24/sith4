@@ -1,17 +1,17 @@
 <template>
-  <v-img :src="logo()" v-bind="$attrs">
+  <v-img :src="document.logo" v-bind="$attrs">
     <slot />
   </v-img>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent } from 'vue';
+import documentStore from '@/stores/document';
 
 export default defineComponent({
   name: 'themed-logo',
   setup() {
-    const logo: () => string = inject('themedLogoURL') || (() => '');
-    return { logo };
+    return { document: documentStore() };
   },
 });
 </script>

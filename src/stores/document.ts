@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import themeStore from './theme';
 
 export default defineStore('document', {
   state: () => ({
@@ -15,6 +16,13 @@ export default defineStore('document', {
     },
     updateTitle() {
       document.title = this.title;
+    },
+  },
+  getters: {
+    logo(): string {
+      const theme = themeStore();
+      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
+      return url(`./${theme.isDark ? 'ae_white' : 'ae_base'}.png`);
     },
   },
 });

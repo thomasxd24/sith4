@@ -1,5 +1,5 @@
 <template>
-  <v-app :theme="theme.isDark() ? 'dark' : 'light'" :class="theme.isDark() ? '__background_color_primary' : '__background_color_white'">
+  <v-app :theme="theme.isDark ? 'dark' : 'light'" :class="theme.isDark ? '__background_color_primary' : '__background_color_white'">
     <navbar-normal />
 
     <main class="main">
@@ -58,12 +58,6 @@ export default defineComponent({
     const theme = themeStore();
     const apiURL = process.env.VUE_APP_API_URL;
     provide('apiURL', apiURL);
-
-    const themedLogoURL = () => {
-      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./${theme.isDark() ? 'ae_white' : 'ae_base'}.png`);
-    };
-    provide('themedLogoURL', themedLogoURL);
 
     return {
       theme,

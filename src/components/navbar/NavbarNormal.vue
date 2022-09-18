@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :color="theme.isDark() ? 'secondary' : 'tertiary'" style="position: inherit !important;">
+  <v-app-bar :color="theme.isDark ? 'secondary' : 'tertiary'" style="position: inherit !important;">
     <div class="left">
       <v-col class="logo">
         <themed-logo aspect-ratio="1/1" width="62" height="62" cover/>
@@ -10,13 +10,13 @@
       </v-col>
     </div>
     <div class="right">
-      <div class="places" v-if="user.isUserLoggedIn()">
+      <div class="places" v-if="user.isLoggedIn">
         <template v-for="place in places" v-bind:key="place" >
           <navbar-place :place="place.name" :status="place.status" />
         </template>
       </div>
 
-      <navbar-buttons :isConnected="user.isUserLoggedIn()" />
+      <navbar-buttons :isConnected="user.isLoggedIn" />
     </div>
 
   </v-app-bar>

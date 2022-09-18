@@ -16,15 +16,17 @@ export default defineStore('theme', {
       this.colorblind = !this.colorblind;
       localStorage.setItem('AE_UTBM_THEME_COLORBLIND', this.colorblind.toString());
     },
+    loadFromStorage(): void {
+      this.dark = localStorage.getItem('AE_UTBM_THEME_DARK') === 'true';
+      this.colorblind = localStorage.getItem('AE_UTBM_THEME_COLORBLIND') === 'true';
+    },
+  },
+  getters: {
     isDark(): boolean {
       return this.dark;
     },
     isColorblind(): boolean {
       return this.colorblind;
-    },
-    loadFromStorage(): void {
-      this.dark = localStorage.getItem('AE_UTBM_THEME_DARK') === 'true';
-      this.colorblind = localStorage.getItem('AE_UTBM_THEME_COLORBLIND') === 'true';
     },
   },
 });

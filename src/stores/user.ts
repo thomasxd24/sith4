@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { User, Notifications } from '@/types/user';
+import themeStore from './theme';
 
 const user: User = {
   id: null,
@@ -32,18 +33,6 @@ const TMPNotifications: Notifications = [
 export default defineStore('user', {
   state: () => user,
   actions: {
-    getNotificationsCount(): number {
-      return TMPNotifications.length; // TODO: use API here
-    },
-    getNotifications(): Notifications {
-      // TODO: use API here
-      return TMPNotifications;
-    },
-    isUserLoggedIn(): boolean {
-      // retrieve token from local storage
-      this.token = localStorage.getItem('AE_UTBM_CONNEXION_TOKEN') || null;
-      return !!this.token;
-    },
     login(token: string): void {
       this.token = token;
       localStorage.setItem('AE_UTBM_CONNEXION_TOKEN', token);
@@ -52,6 +41,27 @@ export default defineStore('user', {
       this.token = null;
       localStorage.setItem('AE_UTBM_CONNEXION_TOKEN', '');
       this.$dispose(); // TODO: is this needed?
+    },
+  },
+  getters: {
+    notificationsCount(): number {
+      return TMPNotifications.length; // TODO: use API here
+    },
+    notifications(): Notifications {
+      // TODO: use API here
+      return TMPNotifications;
+    },
+    isLoggedIn(): boolean {
+      // retrieve token from local storage
+      this.token = localStorage.getItem('AE_UTBM_CONNEXION_TOKEN') || null;
+      return !!this.token;
+    },
+    picture(): string {
+      if (user.picture !== null) return user.picture;
+
+      const theme = themeStore();
+      const url = require.context('@/assets/icons/', false, /\.(png|jpe?g|svg)$/);
+      return url(`./user_no_picture_${theme.dark ? 'dark' : 'light'}.svg`);
     },
   },
 });

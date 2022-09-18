@@ -1,5 +1,5 @@
 <template>
-  <v-list :class="theme.isDark() ? '__background_color_tertiary' : '__background_color_white'" v-bind="$attrs">
+  <v-list :class="theme.isDark ? '__background_color_tertiary' : '__background_color_white'" v-bind="$attrs">
     <slot />
   </v-list>
 </template>
