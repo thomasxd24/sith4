@@ -1,10 +1,12 @@
+// TODO: Add authentification trough other websites (Facebook, Google, Twitter, etc.)
+
 <template>
   <div class="container">
-    <h2>{{ $t('register.title') }}</h2>
+    <h2>{{ $t('connexion.register.title') }}</h2>
     <template v-if="!submitted">
       <v-form v-model="valid" ref="form" class="form" lazy-validation>
         <v-text-field
-          :label="$t('register.username')"
+          :label="$t('connexion.username')"
           :bg-color="isDark() ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
@@ -15,7 +17,7 @@
         <v-row>
           <v-col cols="12" sm="6">
             <v-text-field
-              :label="$t('register.first_name')"
+              :label="$t('connexion.register.first_name')"
               :bg-color="isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
@@ -26,7 +28,7 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              :label="$t('register.last_name')"
+              :label="$t('connexion.register.last_name')"
               :bg-color="isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
@@ -36,7 +38,7 @@
           </v-col>
         </v-row>
         <v-text-field
-          :label="$t('register.birth_date')"
+          :label="$t('connexion.register.birth_date')"
           :bg-color="isDark() ? 'tertiary' : 'light_gray'"
           class="datepicker"
           type="date"
@@ -48,7 +50,7 @@
         />
 
         <v-text-field
-          :label="$t('register.email')"
+          :label="$t('connexion.email')"
           :bg-color="isDark() ? 'tertiary' : 'light_gray'"
           required
           variant="solo"
@@ -59,7 +61,7 @@
         <v-row>
           <v-col cols="12" sm="6">
             <v-text-field
-              :label="$t('register.password')"
+              :label="$t('connexion.password')"
               :bg-color="isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
@@ -72,7 +74,7 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
-              :label="$t('register.confirm_password')"
+              :label="$t('connexion.register.confirm_password')"
               :bg-color="isDark() ? 'tertiary' : 'light_gray'"
               required
               variant="solo"
@@ -89,18 +91,14 @@
       </div>
     </template>
     <div v-else>
-      <p align="center">{{ $t('register.confirmation.line_1') }}</p>
+      <p align="center">{{ $t('connexion.register.confirmation.line_1') }}</p>
       <p align="center"><a :href="`mailto:${form.email}`">{{ form.email }}</a></p>
-      <p align="center">{{ $t('register.confirmation.line_2') }}</p>
+      <p align="center">{{ $t('connexion.register.confirmation.line_2') }}</p>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.btns {
-  gap: 20px;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -118,9 +116,11 @@
   gap: 5px;
 }
 
-.btn, .row {
+.btn {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px
 }
 </style>
@@ -167,50 +167,50 @@ export default defineComponent({
       },
       rules: {
         first_name: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.first_name').toLowerCase() }),
-          (input: string) => (input.length >= 3 && input.length < 20) || this.$t('register.rules.first_name_invalid', { min: 3, max: 20 }),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.register.first_name').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 20) || this.$t('connexion.register.rules.first_name_invalid', { min: 3, max: 20 }),
         ],
         last_name: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.last_name').toLowerCase() }),
-          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('register.rules.last_name_invalid', { min: 3, max: 30 }),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.register.last_name').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('connexion.register.rules.last_name_invalid', { min: 3, max: 30 }),
         ],
         username: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.username').toLowerCase() }),
-          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('register.rules.username_invalid', { min: 3, max: 30 }),
-          (input: string) => (input.replace(/\s/g, '').length === input.length) || this.$t('register.rules.no_whitespace', { field: this.$t('register.username').toLowerCase() }),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.username').toLowerCase() }),
+          (input: string) => (input.length >= 3 && input.length < 30) || this.$t('connexion.register.rules.username_invalid', { min: 3, max: 30 }),
+          (input: string) => (input.replace(/\s/g, '').length === input.length) || this.$t('connexion.register.rules.no_whitespace', { field: this.$t('connexion.register.username').toLowerCase() }),
         ],
         birth_date: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.birth_date').toLowerCase() }),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.register.birth_date').toLowerCase() }),
           (input: string) => {
             const inputDate = new Date(input);
             const todayDate = new Date();
 
             if (todayDate < inputDate) {
-              return this.$t('register.rules.date.invalid');
+              return this.$t('connexion.register.rules.date.invalid');
             }
 
             if (todayDate.getFullYear() - inputDate.getFullYear() <= 16) {
-              return this.$t('register.rules.date.year_invalid', { min: 16, max: 100 });
+              return this.$t('connexion.register.rules.date.year_invalid', { min: 16, max: 100 });
             }
 
             if (todayDate.getFullYear() - inputDate.getFullYear() > 100) {
-              return this.$t('register.rules.date.year_invalid', { min: 16, max: 100 });
+              return this.$t('connexion.register.rules.date.year_invalid', { min: 16, max: 100 });
             }
 
             return true;
           },
         ],
         email: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.email').toLowerCase() }),
-          (input: string) => /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input) || this.$t('register.rules.email_invalid'),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.register.email').toLowerCase() }),
+          (input: string) => /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input) || this.$t('connexion.register.rules.email_invalid'),
         ],
         password: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.password').toLowerCase() }),
-          (input: string) => input.length >= 8 || this.$t('register.rules.password_length', { n: 8 }),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.password').toLowerCase() }),
+          (input: string) => input.length >= 8 || this.$t('connexion.register.rules.password_length', { n: 8 }),
         ],
         confirmPassword: [
-          (input: string) => !!input || this.$t('register.rules.required', { field: this.$t('register.password').toLowerCase() }),
-          (input: string) => this.checkPasswords(input) || this.$t('register.rules.password_mismatch'),
+          (input: string) => !!input || this.$t('connexion.rules.required', { field: this.$t('connexion.password').toLowerCase() }),
+          (input: string) => this.checkPasswords(input) || this.$t('connexion.register.rules.password_mismatch'),
         ],
       },
       showPassword: false,
@@ -232,10 +232,9 @@ export default defineComponent({
   },
   mounted() {
     if (this.user.isUserLoggedIn()) {
-      this.$router.push(localizePath(`/profile/${this.user.username.toLowerCase()}`, this.$i18n.locale, this.$route.path, this.$router));
-      this.errorHandler.show('You are already logged in', { color: 'error' });
+      this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
+      this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
     }
-    this.doc.setPageTitle(this.$t('register.title'));
   },
   methods: {
     checkPasswords(input: string) {

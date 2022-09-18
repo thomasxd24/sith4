@@ -1,6 +1,6 @@
 import type { Translations, LocalizedURLs } from 'vue-lang-router';
 
-const modules = ['index', 'register', 'errors']; // all "modules" in @/lang/<lang>/<module>.json
+const modules = ['index', 'connexion', 'errors']; // all "modules" in @/lang/<lang>/<module>.json
 const langs = process.env.VUE_APP_I18N_SUPPORTED_LOCALE?.split(',') || ['en'];
 const localizedURLs: LocalizedURLs = {};
 const translations: Translations = {};

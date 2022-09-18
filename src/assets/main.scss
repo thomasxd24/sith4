@@ -6,8 +6,12 @@
   color: rgb(var(--v-theme-danger)) !important;
 }
 
+.__background_color_primary {
+  background-color: rgb(var(--v-theme-primary)) !important;
+}
+
 .__background_color_tertiary {
-  background-color: rgb(var(--v-theme-white)) !important;
+  color: rgb(var(--v-theme-white)) !important;
   background-color: rgb(var(--v-theme-tertiary)) !important;
 }
 

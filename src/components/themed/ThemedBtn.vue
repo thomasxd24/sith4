@@ -17,6 +17,7 @@
   color: rgba(var(--color), 1);
   border: 1px solid rgba(var(--color), 1);
   border-radius: 50px;
+  background-color: transparent;
 }
 
 .themed-btn:hover {

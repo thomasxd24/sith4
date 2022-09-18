@@ -1,5 +1,5 @@
 <template>
-  <v-app :theme="theme">
+  <v-app :theme="theme" :class="dark() ? '__background_color_primary' : '__background_color_white'">
     <navbar-normal />
 
     <main class="main">

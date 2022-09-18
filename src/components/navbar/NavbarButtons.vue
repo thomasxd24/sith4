@@ -7,8 +7,7 @@
     <profile-btn v-if="isConnected" />
 
     <div v-if="!isConnected" class="connexion_btns">
-      <!-- TODO: Use a real page that ask the API here -->
-      <localize-btn size="small" v-on:click="user.login('123')">{{ $t("navbar_sign_in") }}</localize-btn>
+      <localize-btn size="small" to="/login">{{ $t("navbar_sign_in") }}</localize-btn>
       <localize-btn size="small" to="/register">{{ $t("navbar_sign_up") }}</localize-btn>
     </div>
   </div>
@@ -34,7 +33,6 @@ import LocalizeBtn from '@/components/localized/LocalizedBtn.vue';
 import TranslateBtn from '@/components/buttons/TranslateBtn.vue';
 import ThemeBtn from '@/components/buttons/ThemeBtn.vue';
 import ProfileBtn from '@/components/buttons/ProfileBtn.vue';
-import userStore from '@/stores/user';
 
 export default defineComponent({
   name: 'navbar-buttons',
@@ -49,9 +47,6 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
-  },
-  setup() {
-    return { user: userStore() };
   },
 });
 </script>

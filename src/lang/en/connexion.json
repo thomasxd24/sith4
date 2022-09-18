@@ -1,0 +1,38 @@
+{
+  "password": "Password",
+  "username": "Username",
+  "email": "Email",
+
+  "rules": {
+    "required": "The {field} is required."
+  },
+
+  "login": {
+    "title": "Login"
+  },
+
+  "register": {
+    "title": "Register",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "birth_date": "Birthday",
+    "confirm_password": "Confirm Password",
+    "confirmation": {
+      "line_1": "A confirmation email has been sent to your email address:",
+      "line_2": "Please click the link in the email to verify your account."
+    },
+    "rules": {
+      "first_name_invalid": "First name must be between {min} and {max} characters.",
+      "last_name_invalid": "Last name must be between {min} and {max} characters.",
+      "username_invalid": "Username must be between {min} and {max} characters.",
+      "email_invalid": "The email address is not valid.",
+      "password_length": "The password must be at least {n} characters",
+      "password_mismatch": "The password and confirm password fields do not match.",
+      "no_whitespace": "The {field} field cannot contain whitespace.",
+      "date": {
+        "invalid": "Date cannot be in the future.",
+        "year_invalid": "You must be in between {min} and {max} year old."
+      }
+    }
+  }
+}
