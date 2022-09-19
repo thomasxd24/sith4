@@ -233,7 +233,7 @@ export default defineComponent({
   mounted() {
     if (this.user.isLoggedIn()) {
       this.$router.push(localizePath('/profile', this.$i18n.locale, this.$route.path, this.$router));
-      this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'error' });
+      this.errorHandler.show(this.$t('errors.already_logged_in'), { color: 'danger' });
     }
   },
   methods: {

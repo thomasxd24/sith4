@@ -10,13 +10,20 @@ export interface APIError {
 export default defineStore('errorHandler', {
   state: () => ({
     displayed: false,
+    title: '',
     message: '',
-    color: 'error',
+    error: undefined as APIError | undefined as Error | undefined,
+    color: 'danger',
     timeout: 4000,
   }),
   actions: {
-    show(message: string, options?: { stack?: Error, color?: string, timeout?: number }) {
+    show(
+      message: string,
+      options?: { stack?: Error; color?: 'danger' | 'warning' | 'success'; timeout?: number },
+    ) {
       this.message = message;
+      this.error = options?.stack;
+
       if (options) {
         this.color = options.color || '#222';
         this.timeout = options.timeout || 4000;
@@ -27,15 +34,14 @@ export default defineStore('errorHandler', {
     },
     axiosError(error: Error | AxiosError<APIError>) {
       if (axios.isAxiosError(error)) {
-        const title = `${(error.response?.data as APIError).statusCode} - ${(error.response?.data as APIError)?.error ?? (error.response?.data as APIError)?.message}`;
-
-        this.show(title, {
-          stack: error,
-          color: 'error',
-        });
-      } else {
-        this.show(error.message, { stack: error, color: 'error' });
-      }
+        this.title = `${(error.response?.data as APIError).statusCode} - ${
+          (error.response?.data as APIError)?.error ?? (error.response?.data as APIError)?.message
+        }`;
+        this.show(this.title, { stack: error, color: 'danger' });
+      } else this.show(error.message, { stack: error, color: 'danger' });
+    },
+    async copyToClipBoard(): Promise<void> {
+      await navigator.clipboard.writeText(`${this.message}\n${this.error ?? ''}`);
     },
   },
 });

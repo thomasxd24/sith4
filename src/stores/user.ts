@@ -107,7 +107,10 @@ export default defineStore('user', {
             this.createdAt = new Date(data.createdAt);
             this.lastLogin = data.lastLogin === null ? null : new Date(data.lastLogin);
           })
-          .catch((error) => errorHandler.axiosError(error));
+          .catch((error) => {
+            this.logout(); // safely logout the user (user can't be fetched => user doesn't exist? => logout)
+            errorHandler.axiosError(error);
+          });
       } else this.logout();
     },
     isLoggedIn(): boolean {

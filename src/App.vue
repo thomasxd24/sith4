@@ -11,11 +11,18 @@
       v-model="errorHandler.displayed"
       :timeout="errorHandler.timeout"
       :color="errorHandler.color"
+      location="bottom right"
       multi-line
-      bottom
-      right
     >
       {{ errorHandler.message }}
+      <template v-slot:actions>
+        <v-btn variant="text" @click="errorHandler.copyToClipBoard()">
+          <v-icon>mdi-content-copy</v-icon>
+        </v-btn>
+        <v-btn variant="text" @click="errorHandler.displayed = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
     </v-snackbar>
   </v-app>
 </template>

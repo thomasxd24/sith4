@@ -1,3 +1,4 @@
 {
-  "already_logged_in": "You are already logged in."
+  "already_logged_in": "You are already logged in.",
+  "must_be_logged_in": "You must be logged in to do access this page."
 }
