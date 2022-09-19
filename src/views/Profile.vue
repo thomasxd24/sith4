@@ -65,7 +65,7 @@
 .picture-and-promo {
   z-index: 1;
   position: absolute;
-  left: 10px;
+  left: 9.5px;
   top: -100px;
   border-radius: 50%;
 
@@ -91,20 +91,30 @@ import { defineComponent } from 'vue';
 import themeStore from '@/stores/theme';
 import userStore from '@/stores/user';
 import ThemedBtn from '@/components/themed/ThemedBtn.vue';
+import errorHandlerStore from '@/stores/errorHandler';
 
 export default defineComponent({
   components: { ThemedBtn },
   name: 'ProfileView',
   setup() {
     return {
+      errorHandler: errorHandlerStore(),
       theme: themeStore(),
       user: userStore(),
     };
   },
   computed: {
     age(): number {
-      return new Date().getFullYear() - new Date(this.user.birthDate).getFullYear();
+      const diff = Date.now() - new Date(this.user.birthDate).getTime();
+      const ageDate = new Date(diff);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
+  },
+  mounted() {
+    if (!this.user.isLoggedIn()) {
+      this.errorHandler.show(this.$t('errors.must_be_logged_in'), { color: 'danger' });
+      this.$router.push({ name: 'login' });
+    }
   },
 });
 
