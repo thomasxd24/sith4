@@ -21,8 +21,7 @@ export default defineStore('document', {
   getters: {
     logo(): string {
       const theme = themeStore();
-      const url = require.context('@/assets/logo/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./${theme.isDark ? 'ae_white' : 'ae_base'}.png`);
+      return `${process.env.BASE_URL}logo/${theme.isDark ? 'ae_white' : 'ae_base'}.png`;
     },
   },
 });

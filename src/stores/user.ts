@@ -129,8 +129,7 @@ export default defineStore('user', {
       // TODO: try to get picture from API first
 
       const theme = themeStore();
-      const url = require.context('@/assets/icons/', false, /\.(png|jpe?g|svg)$/);
-      return url(`./user_no_picture_${theme.dark ? 'dark' : 'light'}.svg`);
+      return `${process.env.BASE_URL}icons/user_no_picture_${theme.dark ? 'dark' : 'light'}.svg`;
     },
     banner(): string {
       // TODO: try to get banner from API first
@@ -139,6 +138,16 @@ export default defineStore('user', {
     promoLogo(): string {
       // TODO: try to get promo logo from API first
       return 'https://c.tenor.com/4hhOJp5zRsYAAAAC/the-office-chili.gif';
+    },
+    socials(): Array<{ name: string; link: string }> {
+      // TODO: use API here
+      return [
+        { name: 'discord', link: 'https://discord.gg/utbm' },
+        { name: 'instagram', link: 'https://www.instagram.com/ae.utbm' },
+        { name: 'linkedin', link: 'https://linkedin.com/' },
+        { name: 'google', link: 'https://twitter.com/ae_utbm' },
+        { name: 'github', link: 'https://github.com/ae-utbm' },
+      ];
     },
   },
 });
