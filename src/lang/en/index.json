@@ -21,5 +21,12 @@
 	"buttons": {
 		"go_back": "Go Back",
 		"submit": "Submit"
+	},
+
+	"season": {
+		"spring": "Spring",
+		"summer": "Summer",
+		"autumn": "Autumn",
+		"winter": "Winter"
 	}
 }

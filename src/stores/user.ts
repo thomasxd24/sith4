@@ -30,6 +30,16 @@ const user: User & UserAuth = {
   refreshToken: null,
 };
 
+interface UserClubs {
+  [semester: string]: Array<{
+    name: string;
+    image: string;
+    role: string;
+  }>
+}
+
+type UserActivities = UserClubs
+
 // TODO: for dev only, replace this with an API call
 const TMPNotifications: Notifications = [
   {
@@ -148,6 +158,46 @@ export default defineStore('user', {
         { name: 'google', link: 'https://twitter.com/ae_utbm' },
         { name: 'github', link: 'https://github.com/ae-utbm' },
       ];
+    },
+    clubs(): UserClubs {
+      // TODO: use API here
+      return {
+        A22: [
+          {
+            name: "AE Dev'",
+            image: 'https://cdn.discordapp.com/icons/971448179075731476/51d34865abb02ff1a710c60e1d11f63f.webp?size=256',
+            role: 'Adjoint Informatique',
+          },
+          {
+            name: "Cous'UT",
+            image: 'https://cdn.discordapp.com/icons/914450271118176287/d15e8afa95c349bceb98d3605de07724.webp?size=256',
+            role: 'Membre',
+          },
+        ],
+        P22: [
+          {
+            name: "AE Dev'",
+            image: 'https://cdn.discordapp.com/icons/971448179075731476/51d34865abb02ff1a710c60e1d11f63f.webp?size=256',
+            role: 'Adjoint Informatique',
+          },
+          {
+            name: "Cous'UT",
+            image: 'https://cdn.discordapp.com/icons/914450271118176287/d15e8afa95c349bceb98d3605de07724.webp?size=256',
+            role: 'Membre',
+          },
+        ],
+      };
+    },
+    activities(): UserActivities {
+      return {
+        A22: [
+          {
+            name: 'FF1J',
+            image: 'https://cdn.discordapp.com/icons/693894849878949938/f35cb2b636d355e9b840a81c23b52274.webp?size=256',
+            role: 'Bénévole',
+          },
+        ],
+      };
     },
   },
 });

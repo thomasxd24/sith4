@@ -47,7 +47,17 @@
     </v-col>
     <v-col :cols="$vuetify.display.width > 1300 ? 9 : 12" class="content-main">
       <v-card class="card" :color="theme.isDark ? 'secondary' : 'tertiary'">
-        test
+        <v-tabs v-model="tab" grow show-arrows>
+          <v-tab
+            v-for="n in [ $t('profile.tabs.general'), $t('profile.tabs.photos'), $t('profile.tabs.family'), $t('profile.tabs.deposit', { amount: 0.00 }) ]"
+            :key="n"
+            :value="n"
+          >
+            {{ n }}
+          </v-tab>
+        </v-tabs>
+
+        <tab-general v-if="tab === $t('profile.tabs.general')" />
       </v-card>
     </v-col>
   </v-row>
@@ -194,11 +204,17 @@ import { defineComponent } from 'vue';
 import themeStore from '@/stores/theme';
 import userStore from '@/stores/user';
 import ThemedBtn from '@/components/themed/ThemedBtn.vue';
+import TabGeneral from '@/components/profile/TabGeneral.vue';
 import errorHandlerStore from '@/stores/errorHandler';
 
 export default defineComponent({
-  components: { ThemedBtn },
+  components: { ThemedBtn, TabGeneral },
   name: 'ProfileView',
+  data() {
+    return {
+      tab: null,
+    };
+  },
   setup() {
     return {
       errorHandler: errorHandlerStore(),

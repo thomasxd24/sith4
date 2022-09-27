@@ -1,4 +1,33 @@
 {
   "display_age": "{age} years old",
-  "edit_btn": "Edit"
+  "edit_btn": "Edit",
+  "tabs": {
+    "general": "General",
+    "photos": "Photos",
+    "family": "Family",
+    "deposit": "Deposit - {amount} €"
+  },
+
+  "general": {
+    "informations": {
+      "title": "Informations",
+      "birth_date": "Birth date",
+      "pronouns": "Pronouns",
+      "gender": "Gender",
+      "department": "Department",
+      "promotion": "Promotion"
+    },
+
+    "contact": {
+      "title": "Contact",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "parent_address": "Parent Address",
+      "emergency_contact": "Emergency Contact"
+    },
+
+    "clubs": "Clubs",
+    "activities": "Big Activities"
+  }
 }
