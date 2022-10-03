@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "@sentry/tracing": "^7.14.1",
+    "@sentry/vue": "^7.14.1",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "pinia": "^2.0.14",

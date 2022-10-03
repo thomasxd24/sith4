@@ -1,5 +1,5 @@
 <template>
-  Home
+  <button @click="throwError()">Throw error</button>
 </template>
 
 <script lang="ts">
@@ -23,6 +23,11 @@ export default defineComponent({
           break;
       }
     }, { immediate: true });
+  },
+  methods: {
+    throwError() {
+      throw new Error('Sentry Error');
+    },
   },
 });
 </script>
