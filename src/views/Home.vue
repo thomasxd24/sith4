@@ -1,5 +1,5 @@
 <template>
-  <button @click="throwError()">Throw error</button>
+  <v-btn @click="throwError()">Throw error</v-btn>
 </template>
 
 <script lang="ts">
